@@ -44,10 +44,13 @@ nav button.on{color:var(--g);font-weight:700}
 .inst{position:fixed;left:14px;bottom:calc(82px + env(safe-area-inset-bottom,0px));background:var(--g);color:#fff;border:0;border-radius:999px;padding:12px 16px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:10;cursor:pointer}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .inst{color:#06210f}}
 .ins{position:fixed;left:12px;right:12px;bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:11;font-size:14px}
+header{position:relative}
+.hshare{position:absolute;right:14px;top:16px;background:rgba(255,255,255,.22);color:inherit;text-decoration:none;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}
 </style>
 </head>
 <body>
 <header>
+<a id="hshare" class="hshare" target="_blank" rel="noopener">📤 Share</a>
 <h1>🇳🇬 Corper Hub</h1>
 <p>Directions to camp, travel buddies, and a camp checklist, all in one place.</p>
 </header>
@@ -137,6 +140,36 @@ nav button.on{color:var(--g);font-weight:700}
 </div>
 </section>
 
+<section id="t-hs" class="tab">
+<div class="card">
+<h2>🏠 Find a room or roommate</h2>
+<p style="margin:0;font-size:14px;color:var(--mu)">Fill this in, then post it in your state group. Corpers will reply to you on WhatsApp.</p>
+<label for="hm">What do you need?</label>
+<select id="hm"><option value="need">I need a room or roommate</option><option value="have">I have a room or space to share</option></select>
+<label for="hst">State</label><select id="hst"></select>
+<label for="ha">Area / close to</label><input id="ha" placeholder="e.g. near my PPA, Barnawa">
+<label for="hb" id="hbl">Your budget (₦)</label><input id="hb" placeholder="e.g. 150,000 per year">
+<div id="hspw" style="display:none"><label for="hsp">Spaces available</label><input id="hsp" type="number" inputmode="numeric" min="1" placeholder="e.g. 2"></div>
+<label for="hd">Move-in date</label><input id="hd" type="date">
+<label for="hg">Preference</label><select id="hg"><option>No preference</option><option>Male only</option><option>Female only</option></select>
+<label for="hw">Your WhatsApp number</label><input id="hw" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
+<button class="btn" id="hmk">Create my housing message</button>
+<div id="hout" style="display:none"><div class="msg" id="hpv"></div><a class="btn" id="hsh" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+<a id="grp3" class="btn alt" target="_blank" rel="noopener" style="display:none"></a>
+</div>
+<div class="card" style="border:2px solid #d92d20">
+<h3 style="margin-top:0;color:#d92d20">🛑 Before you pay for a house</h3>
+<ul>
+<li><b>Inspect in person</b>, in daylight, with someone. Never pay for a place you have not seen.</li>
+<li>Don't send money to someone you haven't met. Fake landlords and agents target new corpers.</li>
+<li>Be careful with rushed payments, "many people are interested" and rent that is too cheap.</li>
+<li>Ask for a <b>receipt or written agreement</b>, and confirm the person really owns or manages the place.</li>
+<li>Meet a possible roommate in a <b>public place</b> first. Send the address and their number to someone you trust.</li>
+<li>Ask other corpers in your state group which areas are safe.</li>
+</ul>
+</div>
+</section>
+
 <section id="t-sos" class="tab">
 <div class="card">
 <h2>🆘 Emergency alert</h2>
@@ -188,9 +221,10 @@ nav button.on{color:var(--g);font-weight:700}
 <nav>
 <button data-t="dir" class="on"><b>📍</b>Directions</button>
 <button data-t="ride"><b>🚌</b>Rides</button>
+<button data-t="hs"><b>🏠</b>Housing</button>
 <button data-t="sos"><b>🆘</b>Safety</button>
 <button data-t="gd"><b>🎒</b>Checklist</button>
-<button data-t="sh"><b>📤</b>Share</button>
+
 </nav>
 <script>
 var S=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
@@ -283,6 +317,20 @@ if(!navigator.onLine){$("mn").textContent="You are offline. Connect to data to l
 $("mn").textContent="The pin shows the camp area. Confirm the exact camp with your call-up letter.";
 $("mf").src="https://www.google.com/maps?q="+encodeURIComponent("NYSC Permanent Orientation Camp "+sel.value)+"&output=embed"}
 $("see").onclick=showMap;
+/* housing */
+var hs=$("hst");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;hs.appendChild(o)});
+var h0=maps;
+maps=function(){h0();hs.value=sel.value;var c=G[sel.value],a=$("grp3");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.style.display=c?"block":"none";a.textContent="💬 Join "+sel.value+" corpers WhatsApp group"};
+sel.onchange=maps;s2.onchange=function(){sel.value=s2.value;maps()};hs.onchange=function(){sel.value=hs.value;maps()};maps();
+$("hm").onchange=function(){var v=$("hm").value=="have";$("hspw").style.display=v?"block":"none";$("hbl").textContent=v?"Rent (₦)":"Your budget (₦)";$("hb").placeholder=v?"e.g. 100,000 per year, per person":"e.g. 150,000 per year"};
+$("hmk").onclick=function(){
+var have=$("hm").value=="have",a=$("ha").value.trim(),b=$("hb").value.trim(),w=$("hw").value.trim();
+if(!a||!w){alert("Please enter the area and your WhatsApp number.");return}
+var d=$("hd").value,g=$("hg").value,sp=$("hsp").value;
+var m=(have?"🏠 ROOM / SPACE TO SHARE (NYSC)":"🏠 ROOM / ROOMMATE NEEDED (NYSC)")+"\nState: "+sel.value+"\nArea: "+a+(b?"\n"+(have?"Rent: ₦":"Budget: ₦")+b.replace(/^₦/,""):"")+(have&&sp?"\nSpaces: "+sp:"")+(d?"\n"+(have?"Available from: ":"Move-in: ")+d:"")+"\nPreference: "+g+"\nWhatsApp: "+w+"\n\n"+(have?"Serious corpers only. Please see the place in daylight, and let us meet in a public place first.":"Any corper with a room or space to share? Message me. I will meet in a public place first.")+"\n\nMore corper tools: "+site;
+$("hpv").textContent=m;$("hsh").href="https://wa.me/?text="+encodeURIComponent(m);$("hout").style.display="block"};
+$("hshare").href=$("shr").href;
 gl();refresh();
 /* pwa */
 var dp=null,isS=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
