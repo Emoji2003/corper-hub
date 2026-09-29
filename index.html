@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corper Hub – Get to NYSC Camp Safely</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b7a3b"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Corper Hub">
+<style>
+:root{--bg:#f4f8f4;--card:#fff;--tx:#12261a;--mu:#5b6f61;--g:#0b7a3b;--g2:#e3f3e8;--bd:#d5e3d9;--warn:#fff6dc;--wt:#6b5200;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1711;--card:#15231a;--tx:#e6f2ea;--mu:#93a99a;--g:#3ecf76;--g2:#173324;--bd:#25382b;--warn:#3a3210;--wt:#f0d77a}}
+:root[data-theme="dark"]{--bg:#0d1711;--card:#15231a;--tx:#e6f2ea;--mu:#93a99a;--g:#3ecf76;--g2:#173324;--bd:#25382b;--warn:#3a3210;--wt:#f0d77a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:76px}
+header{background:var(--g);color:#fff;padding:22px 18px 20px}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) header{color:#06210f}}
+header h1{margin:0 0 4px;font-size:22px}
+header p{margin:0;opacity:.92;font-size:14px}
+main{max-width:640px;margin:0 auto;padding:14px}
+.tab{display:none}.tab.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:18px;margin:2px 0 8px}
+h3{font-size:15px;margin:12px 0 6px;color:var(--g)}
+.warn{background:var(--warn);color:var(--wt);border-radius:12px;padding:10px 12px;font-size:14px;margin-bottom:12px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
+input,select{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:16px}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:600;background:var(--g);color:#fff;margin-top:12px;cursor:pointer}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#06210f}}
+.btn.alt{background:var(--g2);color:var(--g)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bd)}
+.chk:last-child{border:0}
+.chk input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--g)}
+.chk.done span{text-decoration:line-through;color:var(--mu)}
+ol,ul{padding-left:20px;margin:6px 0}
+li{margin:4px 0}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;color:var(--mu);padding:10px 4px 9px;font-size:12px;cursor:pointer}
+nav button b{display:block;font-size:20px;font-weight:400}
+nav button.on{color:var(--g);font-weight:700}
+.msg{background:var(--g2);border-radius:10px;padding:10px;font-size:14px;white-space:pre-wrap;margin-top:10px}
+.fab{position:fixed;right:14px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:64px;height:64px;border-radius:50%;background:#d92d20;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:10}
+.sos{background:#d92d20!important;color:#fff!important;font-size:22px;padding:22px}
+.crow{display:flex;gap:8px;margin-top:8px}
+.inst{position:fixed;left:14px;bottom:calc(82px + env(safe-area-inset-bottom,0px));background:var(--g);color:#fff;border:0;border-radius:999px;padding:12px 16px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:10;cursor:pointer}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .inst{color:#06210f}}
+.ins{position:fixed;left:12px;right:12px;bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:11;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+<h1>🇳🇬 Corper Hub</h1>
+<p>Directions to camp, travel buddies, and a camp checklist, all in one place.</p>
+</header>
+<main>
+
+<section id="t-dir" class="tab on">
+<div class="bb"></div>
+<div class="card">
+<h2>📍 Directions to your camp</h2>
+<label for="st">Select your posted state</label>
+<select id="st"></select>
+<a id="go" class="btn" target="_blank" rel="noopener">Open directions in Google Maps</a>
+<a id="see" class="btn alt" target="_blank" rel="noopener">See the camp on the map</a>
+<a id="grp" class="btn" target="_blank" rel="noopener" style="display:none"></a>
+</div>
+<div class="card">
+<h3>How to get there</h3>
+<ol>
+<li>Tap the button above. Maps starts from <b>your current location</b>; switch to "Transit" or "Driving" to suit how you travel.</li>
+<li>In the state capital, ask for the <b>"NYSC Orientation Camp"</b>. Bike and taxi drivers know it, especially during camping season.</li>
+<li>Agree on the fare <b>before</b> you enter a bike or cab.</li>
+<li>Save the map to offline use in Google Maps if your network is weak.</li>
+</ol>
+<div class="warn">Camp locations can change. Check your call-up letter or the official NYSC portal for your exact camp.</div>
+</div>
+</section>
+
+<section id="t-ride" class="tab">
+<div class="bb"></div>
+<div class="card">
+<h2>🚌 Find people to travel with</h2>
+<p style="margin:0;color:var(--mu);font-size:14px">Fill this in, then send it to your WhatsApp groups or status. Corpers on the same route will reply to you directly.</p>
+<label for="nm">Your first name</label><input id="nm" placeholder="e.g. Amina">
+<label for="fr">Travelling from</label><input id="fr" placeholder="e.g. Kano">
+<label for="to">Going to (state / camp)</label><input id="to" placeholder="e.g. Kaduna camp">
+<label for="dt">Date</label><input id="dt" type="date">
+<label for="tm">Time</label><input id="tm" type="time">
+<label for="wa">Your WhatsApp number</label><input id="wa" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
+<button class="btn" id="mk">Create my travel message</button>
+<div id="out" style="display:none">
+<div class="msg" id="pv"></div>
+<a class="btn" id="sh" target="_blank" rel="noopener">Share on WhatsApp</a>
+</div>
+</div>
+<div class="card">
+<h3>💬 Corpers posted to your state</h3>
+<p style="margin:0;font-size:14px;color:var(--mu)">Join your state group to meet people going the same way. Post your travel message there too.</p>
+<label for="st2">Your posted state</label><select id="st2"></select>
+<a id="grp2" class="btn" target="_blank" rel="noopener" style="display:none"></a>
+<div class="warn" style="margin-top:12px">Public groups are open to strangers. Never send money, documents or your home address to anyone in a group, and be careful who you travel with.</div>
+</div>
+<div class="card">
+<h3>Travel safety tips</h3>
+<ul>
+<li>Travel in <b>daylight</b>. Leave early so you reach camp before dark.</li>
+<li>Board only at a <b>busy public park</b>. Never meet at a private or isolated place.</li>
+<li>Never accept a ride in a <b>private car offered by a stranger</b>.</li>
+<li>Don't pay the full fare to an unknown individual before you travel.</li>
+<li>Only post transport <b>you have arranged yourself</b>. This site does not list drivers or vouch for anyone.</li>
+<li>Share your <b>live location</b> on WhatsApp for the whole trip.</li>
+<li>Keep your call-up letter and money in different bags. Keep valuables close.</li>
+</ul>
+</div>
+</section>
+
+<section id="t-gd" class="tab">
+<div class="card">
+<h2>🎒 Camp checklist</h2>
+<p style="margin:0 0 6px;color:var(--mu);font-size:14px">Tap to tick. Your progress is saved on this phone.</p>
+<div id="cl"></div>
+<div class="warn" style="margin-top:12px">This is a general list. Your call-up letter and the official NYSC portal are the final word on what to bring.</div>
+</div>
+<div class="card">
+<h3>Registration steps (general)</h3>
+<ol>
+<li>Arrive at camp with your printed call-up letter and original documents.</li>
+<li>Go through document screening at the registration hall.</li>
+<li>Complete the medical checks and biometrics.</li>
+<li>Collect your kit and accommodation slot, and get your platoon.</li>
+</ol>
+</div>
+</section>
+
+<section id="t-sos" class="tab">
+<div class="card">
+<h2>🆘 Emergency alert</h2>
+<p style="margin:0;font-size:14px;color:var(--mu)">One tap opens WhatsApp with an emergency message and your map location. Press Send to deliver it. The red SOS button stays on every page.</p>
+<a id="sos" class="btn sos" target="_blank" rel="noopener">🆘 SEND SOS NOW</a>
+<a id="any" class="btn alt" target="_blank" rel="noopener">Send to any WhatsApp contact or group</a>
+<a class="btn alt" href="tel:112">📞 Call 112 (national emergency line)</a>
+<a id="safe" class="btn alt" target="_blank" rel="noopener">✅ Tell them I'm safe now</a>
+<p id="locst" style="font-size:13px;color:var(--mu);margin:12px 0 0"></p>
+<button class="btn alt" id="en">Turn on location</button>
+</div>
+<div class="card">
+<h3>Trusted contacts (up to 3)</h3>
+<p style="margin:0;font-size:14px;color:var(--mu)">Save them once. SOS goes straight to the first contact.</p>
+<div id="cbox"></div>
+<label for="cn">Name</label><input id="cn" placeholder="e.g. Mum">
+<label for="cp">WhatsApp number</label><input id="cp" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
+<button class="btn" id="addc">Save contact</button>
+</div>
+<div class="card">
+<h3>Share my trip</h3>
+<label for="pl">Vehicle plate number</label><input id="pl" placeholder="e.g. ABC-123-XY">
+<label for="pk">Park / transport company</label><input id="pk">
+<label for="rt">Route</label><input id="rt" placeholder="e.g. Kano to Kaduna">
+<a id="trip" class="btn" target="_blank" rel="noopener">Share my trip with a trusted contact</a>
+</div>
+<div class="card">
+<h3>Good to know</h3>
+<ul>
+<li>After you tap SOS, WhatsApp opens. <b>You must press Send</b> in WhatsApp.</li>
+<li>It needs data or network. It does not call the police, so dial <b>112</b> too.</li>
+<li>For live tracking: in a WhatsApp chat, tap attach, then Location, then <b>Share live location</b>.</li>
+<li>Test SOS with a friend before you travel.</li>
+</ul>
+</div>
+</section>
+
+<section id="t-sh" class="tab">
+<div class="card">
+<h2>Help another corper</h2>
+<p>Many corpers are travelling right now. Share this page with your groups so they can find their camp and travel buddies.</p>
+<a class="btn" id="shr" target="_blank" rel="noopener">Share this hub on WhatsApp</a>
+</div>
+</section>
+
+</main>
+<a id="fab" class="fab" target="_blank" rel="noopener" aria-label="Send emergency alert">SOS</a>
+<button id="inst" class="inst" style="display:none">📲 Install app</button><div id="ins" class="card ins" style="display:none"></div>
+<nav>
+<button data-t="dir" class="on"><b>📍</b>Directions</button>
+<button data-t="ride"><b>🚌</b>Rides</button>
+<button data-t="sos"><b>🆘</b>Safety</button>
+<button data-t="gd"><b>🎒</b>Checklist</button>
+<button data-t="sh"><b>📤</b>Share</button>
+</nav>
+<script>
+var S=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+var ITEMS=["Printed call-up letter","Original credentials + photocopies","Valid ID / school ID","Passport photographs","White T-shirts and white shorts","White socks and white canvas shoes","Mattress, bedsheet, pillow","Mosquito net","Padlock (for your box)","Bucket, plate, cup, spoon","Toiletries, towel, sandals","Torch and power bank","Cash + ATM card","Personal drugs / first aid","Flask or water bottle","Phone charger"];
+var $=function(i){return document.getElementById(i)};
+var site=location.href.split("#")[0];
+/* directions */
+var sel=$("st");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;sel.appendChild(o)});
+function maps(){
+var q=encodeURIComponent("NYSC Permanent Orientation Camp "+sel.value);
+$("go").href="https://www.google.com/maps/dir/?api=1&destination="+q;
+$("see").href="https://www.google.com/maps/search/?api=1&query="+q;
+}
+var G={"Abia":"ICOSlsF6U4zJqesR6P5vE9","Adamawa":"BGHXT8VUYTfKxdXJbQ6lO0","Akwa Ibom":"KgbkfLSBTh4JwLmneAZ7K5","Anambra":"E4UM45h6NyC2fAzXMpH5y8","Bauchi":"KXXZz5GousqJz2XyPnosMx","Bayelsa":"LwltF7ELJ7xDHrhTM5ktoi","Benue":"BCzE6nnWLKD3ZMiHU0WSTp","Borno":"JI3wRCTS6ff24T1R38zntp","Cross River":"CrCsqZm7LGD3Dm2iicUAmr","Delta":"F3sfR7xfbk5AnTWAeTbVbw","Ebonyi":"ItxLDao1UBbGVT8qZtseYl","Edo":"EjjUgBKbJ5q8TuzhvAoFvA","Ekiti":"Ez6PkaJ9c3PAgRtqdpDckh","Enugu":"JiT5po0uO8zIofRwqqzUkh","FCT Abuja":"Cwt7chOpevJ6WLItHXZscy","Gombe":"H56p7gdC50G5SAjCeMJQds","Imo":"JOyvUZUIRedCH5cBQoaZ0y","Jigawa":"DXtRWPd0AXkATSpuiC0MoX","Kaduna":"DZXyanrRAULC2QmejwZe25","Kano":"CLugZnQ0cOMAUpdUBCzvYy","Katsina":"B6eavXDLAdfEAbtbmxWS3B","Kebbi":"H9YSYTA3efC09xJK3mxouL","Kogi":"KKkPHyvRIN47zTMC0DTttI","Kwara":"Hc2TKiSct1uFAX1AglxlHW","Lagos":"GJmKvEzcAiwFWMQP9qO2Lb","Nasarawa":"Cu2wyYAjWPJAb6MCsZqfvZ","Niger":"CE80402ruVP86GxLY8LF2k","Ogun":"GAYzH3k63AL2ND8sMR6LE3","Ondo":"Ld8Kg1S7TC3B8n538o6Fkj","Osun":"K6NMARrXCMPIRu2mU3XMEC","Oyo":"E9L64rtU6wR2Epc1s6PcW3","Plateau":"D8HlVQw1cExGaGtHSmJG3G","Rivers":"KniiIXaQUmy1VjCtIw8i24","Sokoto":"E8AV2jvak0LA6i3wwSo4fb","Taraba":"C7iqweYyJcjDKN5Md50pib","Yobe":"JpY9OJipbgoJIkbpTi6qIc","Zamfara":"GDpYv9MeUXvB6B6honXQW2"};
+var s2=$("st2");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;s2.appendChild(o)});
+var m0=maps;
+maps=function(){m0();s2.value=sel.value;
+var c=G[sel.value],u=c?"https://chat.whatsapp.com/"+c:"";
+["grp","grp2"].forEach(function(i){var a=$(i);a.href=u||"#";a.style.display=u?"block":"none";a.textContent="💬 Join "+sel.value+" corpers WhatsApp group"})};
+s2.onchange=function(){sel.value=s2.value;maps()};
+sel.onchange=maps;maps();
+/* tabs */
+document.querySelectorAll("nav button").forEach(function(b){
+b.onclick=function(){
+document.querySelectorAll("nav button").forEach(function(x){x.classList.remove("on")});
+document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on")});
+b.classList.add("on");$("t-"+b.dataset.t).classList.add("on");window.scrollTo(0,0)}});
+/* checklist */
+var saved={};
+try{saved=JSON.parse(localStorage.getItem("cl")||"{}")}catch(e){}
+ITEMS.forEach(function(t,i){
+var d=document.createElement("label");d.className="chk"+(saved[i]?" done":"");
+d.style.cssText="margin:0;color:inherit;font-size:16px";
+d.innerHTML='<input type="checkbox"'+(saved[i]?" checked":"")+'><span></span>';
+d.querySelector("span").textContent=t;
+d.querySelector("input").onchange=function(e){
+saved[i]=e.target.checked;d.classList.toggle("done",e.target.checked);
+try{localStorage.setItem("cl",JSON.stringify(saved))}catch(x){}};
+$("cl").appendChild(d)});
+/* rides */
+$("mk").onclick=function(){
+var n=$("nm").value.trim(),f=$("fr").value.trim(),t=$("to").value.trim(),w=$("wa").value.trim();
+if(!f||!t||!w){alert("Please fill in where you are going from, where you are going to, and your WhatsApp number.");return}
+var d=$("dt").value,tm=$("tm").value;
+var m="🚌 NYSC TRAVEL BUDDY NEEDED\n"+(n?"Name: "+n+"\n":"")+"From: "+f+"\nTo: "+t+(d?"\nDate: "+d:"")+(tm?"\nTime: "+tm:"")+"\nWhatsApp: "+w+"\n\nLooking for corpers going the same way so we can travel together and share cost. Message me!\n\nFind your camp directions: "+site;
+$("pv").textContent=m;$("sh").href="https://wa.me/?text="+encodeURIComponent(m);$("out").style.display="block"};
+$("shr").href="https://wa.me/?text="+encodeURIComponent("NYSC corpers: find directions to your camp, travel buddies and a camp checklist here 👇\n"+site);
+/* safety */
+var loc=null,cts=[];
+try{cts=JSON.parse(localStorage.getItem("ct")||"[]")}catch(e){}
+function save(){try{localStorage.setItem("ct",JSON.stringify(cts))}catch(e){}}
+function num(p){var d=String(p).replace(/\D/g,"");if(d.indexOf("234")==0)return d;if(d.charAt(0)=="0")return "234"+d.slice(1);if(d.length==10)return "234"+d;return d}
+function wa(msg,p){return "https://wa.me/"+(p?num(p):"")+"?text="+encodeURIComponent(msg)}
+function where(){if(!loc)return "📍 Location unavailable. Please call me right away.";return "📍 My location: https://www.google.com/maps?q="+loc.la+","+loc.lo+"\n(accurate to about "+Math.round(loc.ac)+" m, at "+loc.t+")"}
+function refresh(){
+var m="🆘 EMERGENCY! I am a corper and I need help now.\n"+where()+"\nPlease call me. If you cannot reach me, contact the police on 112.";
+var first=cts[0]?cts[0].p:"";
+$("sos").href=wa(m,first);$("fab").href=wa(m,first);$("any").href=wa(m);
+$("safe").href=wa("✅ I am safe now. Thank you."+(loc?"\n📍 https://www.google.com/maps?q="+loc.la+","+loc.lo:""),first);
+var tm="🚌 My trip details (NYSC camp travel)\nVehicle / plate no: "+($("pl").value||"-")+"\nPark / company: "+($("pk").value||"-")+"\nRoute: "+($("rt").value||"-")+"\n"+where()+"\nPlease check on me. I will message when I arrive.";
+$("trip").href=wa(tm,first);
+var box=$("cbox");box.innerHTML="";
+cts.forEach(function(c,i){
+var r=document.createElement("div");r.className="crow";
+var a=document.createElement("a");a.className="btn";a.style.cssText="margin:0;flex:1;width:auto";a.target="_blank";a.rel="noopener";a.href=wa(m,c.p);a.textContent="🆘 Alert "+c.n;
+var x=document.createElement("button");x.className="btn alt";x.style.cssText="margin:0;width:64px";x.textContent="✕";
+x.onclick=function(){cts.splice(i,1);save();refresh()};
+r.appendChild(a);r.appendChild(x);box.appendChild(r)});
+$("locst").textContent=loc?"✅ Location ready (updated "+loc.t+")":"⚠️ Location is off. Allow location so your alert can include where you are."}
+$("addc").onclick=function(){
+var n=$("cn").value.trim(),p=$("cp").value.trim();
+if(cts.length>=3){alert("You can save up to 3 contacts. Remove one first.");return}
+if(!n||p.replace(/\D/g,"").length<10){alert("Enter a name and a valid WhatsApp number.");return}
+cts.push({n:n,p:p});save();$("cn").value="";$("cp").value="";refresh()};
+["pl","pk","rt"].forEach(function(i){$(i).oninput=refresh});
+function gl(){
+if(!navigator.geolocation){refresh();return}
+try{navigator.geolocation.watchPosition(function(p){
+loc={la:p.coords.latitude.toFixed(5),lo:p.coords.longitude.toFixed(5),ac:p.coords.accuracy,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})};refresh()},
+function(){loc=null;refresh()},{enableHighAccuracy:true,maximumAge:15000,timeout:20000})}catch(e){refresh()}}
+$("en").onclick=gl;
+document.querySelectorAll("nav button").forEach(function(b){b.addEventListener("click",function(){$("fab").style.display=b.dataset.t=="sos"?"none":"flex"})});
+var BB='<div class="card" style="border:2px solid #d92d20"><h3 style="margin-top:0;color:#d92d20">🚦 Before you board</h3><ol><li>Take a <b>photo of the vehicle and its plate number</b>.</li><li>Send the photo and plate number to a family member or trusted friend on WhatsApp.</li><li>Only then, board.</li></ol><p style="font-size:13px;color:var(--mu);margin:6px 0 0">The button below sends plate number, park, route and location. Send the photo yourself in the same WhatsApp chat.</p><button class="btn" data-go="sos">Send my trip details now</button></div>';
+document.querySelectorAll(".bb").forEach(function(e){e.innerHTML=BB;e.querySelector("[data-go]").onclick=function(){document.querySelector('nav button[data-t="sos"]').click();setTimeout(function(){$("trip").scrollIntoView({block:"center"})},50)}});
+gl();refresh();
+/* pwa */
+var dp=null,isS=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+var ib=$("inst"),ic=$("ins");
+if(!isS)ib.style.display="block";
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();dp=e});
+window.addEventListener("appinstalled",function(){ib.style.display="none";ic.style.display="none"});
+ib.onclick=function(){
+if(dp){dp.prompt();dp.userChoice.then(function(){dp=null});return}
+var ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ic.innerHTML=(ios?"<b>iPhone:</b> open this page in <b>Safari</b>, tap the <b>Share</b> button, then <b>Add to Home Screen</b>.":"<b>Android:</b> open this page in <b>Chrome</b>, tap the <b>&#8942; menu</b>, then <b>Install app</b> or <b>Add to Home screen</b>.")+' <button class="btn alt" id="xi">Got it</button>';
+ic.style.display="block";$("xi").onclick=function(){ic.style.display="none"}};
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")==0)navigator.serviceWorker.register("sw.js").catch(function(){});
+</script>
+</body>
+</html>
