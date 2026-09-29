@@ -88,7 +88,7 @@ header{position:relative}
 <div class="bb"></div>
 <div class="card">
 <h2>🚌 Find people to travel with</h2>
-<p style="margin:0;color:var(--mu);font-size:14px">Fill this in, then send it to your WhatsApp groups or status. Corpers on the same route will reply to you directly.</p>
+<p style="margin:0;color:var(--mu);font-size:14px">Fill this in, then post it in your state group. Corpers on the same route will reply to you directly.</p>
 <label for="nm">Your first name</label><input id="nm" placeholder="e.g. Amina">
 <label for="fr">Travelling from</label><input id="fr" placeholder="e.g. Kano">
 <label for="to">Going to (state / camp)</label><input id="to" placeholder="e.g. Kaduna camp">
@@ -98,7 +98,10 @@ header{position:relative}
 <button class="btn" id="mk">Create my travel message</button>
 <div id="out" style="display:none">
 <div class="msg" id="pv"></div>
-<a class="btn" id="sh" target="_blank" rel="noopener">Share on WhatsApp</a>
+<button class="btn" id="rgo">📋 Copy &amp; post in your state group</button>
+<p id="rnote" style="font-size:14px;margin:10px 0 0"></p>
+<p style="font-size:13px;color:var(--mu);margin:6px 0 0">Some groups only let admins post. If so, send the message to an admin.</p>
+<a class="btn alt" id="sh" target="_blank" rel="noopener">Send to a contact or status instead</a>
 </div>
 </div>
 <div class="card">
@@ -154,7 +157,10 @@ header{position:relative}
 <label for="hg">Preference</label><select id="hg"><option>No preference</option><option>Male only</option><option>Female only</option></select>
 <label for="hw">Your WhatsApp number</label><input id="hw" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
 <button class="btn" id="hmk">Create my housing message</button>
-<div id="hout" style="display:none"><div class="msg" id="hpv"></div><a class="btn" id="hsh" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+<div id="hout" style="display:none"><div class="msg" id="hpv"></div><button class="btn" id="hgo">📋 Copy &amp; post in your state group</button>
+<p id="hnote" style="font-size:14px;margin:10px 0 0"></p>
+<p style="font-size:13px;color:var(--mu);margin:6px 0 0">Some groups only let admins post. If so, send the message to an admin.</p>
+<a class="btn alt" id="hsh" target="_blank" rel="noopener">Send to a contact or status instead</a></div>
 <a id="grp3" class="btn alt" target="_blank" rel="noopener" style="display:none"></a>
 </div>
 <div class="card" style="border:2px solid #d92d20">
@@ -321,7 +327,7 @@ $("see").onclick=showMap;
 var hs=$("hst");
 S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;hs.appendChild(o)});
 var h0=maps;
-maps=function(){h0();hs.value=sel.value;var c=G[sel.value],a=$("grp3");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.style.display=c?"block":"none";a.textContent="💬 Join "+sel.value+" corpers WhatsApp group"};
+maps=function(){h0();hs.value=sel.value;var c=G[sel.value],a=$("grp3");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.style.display=c?"block":"none";a.textContent="💬 Join "+sel.value+" corpers WhatsApp group";$("hgo").textContent=$("rgo").textContent="📋 Copy & post in "+sel.value+" group"};
 sel.onchange=maps;s2.onchange=function(){sel.value=s2.value;maps()};hs.onchange=function(){sel.value=hs.value;maps()};maps();
 $("hm").onchange=function(){var v=$("hm").value=="have";$("hspw").style.display=v?"block":"none";$("hbl").textContent=v?"Rent (₦)":"Your budget (₦)";$("hb").placeholder=v?"e.g. 100,000 per year, per person":"e.g. 150,000 per year"};
 $("hmk").onclick=function(){
@@ -331,6 +337,12 @@ var d=$("hd").value,g=$("hg").value,sp=$("hsp").value;
 var m=(have?"🏠 ROOM / SPACE TO SHARE (NYSC)":"🏠 ROOM / ROOMMATE NEEDED (NYSC)")+"\nState: "+sel.value+"\nArea: "+a+(b?"\n"+(have?"Rent: ₦":"Budget: ₦")+b.replace(/^₦/,""):"")+(have&&sp?"\nSpaces: "+sp:"")+(d?"\n"+(have?"Available from: ":"Move-in: ")+d:"")+"\nPreference: "+g+"\nWhatsApp: "+w+"\n\n"+(have?"Serious corpers only. Please see the place in daylight, and let us meet in a public place first.":"Any corper with a room or space to share? Message me. I will meet in a public place first.")+"\n\nMore corper tools: "+site;
 $("hpv").textContent=m;$("hsh").href="https://wa.me/?text="+encodeURIComponent(m);$("hout").style.display="block"};
 $("hshare").href=$("shr").href;
+function old(t){var x=document.createElement("textarea");x.value=t;x.style.cssText="position:fixed;opacity:0";document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(x)}
+function cp(t){try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).catch(function(){old(t)});return}}catch(e){}old(t)}
+function post(m,nid){cp(m);var c=G[sel.value];if(c)window.open("https://chat.whatsapp.com/"+c,"_blank");$(nid).textContent="✅ Message copied. In the "+sel.value+" group, tap the message box, paste and send."}
+$("hgo").onclick=function(){post($("hpv").textContent,"hnote")};
+$("rgo").onclick=function(){post($("pv").textContent,"rnote")};
+maps();
 gl();refresh();
 /* pwa */
 var dp=null,isS=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
