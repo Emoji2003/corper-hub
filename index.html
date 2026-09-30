@@ -46,6 +46,13 @@ nav button.on{color:var(--g);font-weight:700}
 .ins{position:fixed;left:12px;right:12px;bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:11;font-size:14px}
 header{position:relative}
 .hshare{position:absolute;right:14px;top:16px;background:rgba(255,255,255,.22);color:inherit;text-decoration:none;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}
+details{border-bottom:1px solid var(--bd);padding:10px 0}
+details:last-of-type{border:0}
+summary{cursor:pointer;font-weight:700;font-size:15px}
+details p,details ul{margin:8px 0 0;font-size:14px}
+.room{border:1px solid var(--bd);border-radius:12px;padding:12px;margin-top:10px}
+.room .t{font-weight:700}
+.room .m{font-size:13px;color:var(--mu);margin-top:4px}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -59,11 +66,13 @@ header{position:relative}
 <main>
 
 <section id="t-dir" class="tab on">
+<div id="dates" class="card" style="background:var(--g2)"><b>📅 Batch C Stream I camp:</b> 30 Sept to 20 Oct 2026. Registration closes at midnight on <b>Fri 2 Oct</b>, and swearing-in is the same day. NYSC advises <b>no night travel</b> and boarding only at designated motor parks.</div>
 <div class="bb"></div>
 <div class="card">
 <h2>📍 Directions to your camp</h2>
 <label for="st">Select your posted state</label>
 <select id="st"></select>
+<p id="camploc" style="margin:12px 0 0;font-weight:600"></p>
 <a id="go" class="btn" target="_blank" rel="noopener">🧭 Get directions (Google Maps)</a>
 <button class="btn alt" id="see">🗺️ Show camp on map here</button>
 <div id="mbox" style="display:none;margin-top:12px">
@@ -129,6 +138,11 @@ header{position:relative}
 
 <section id="t-gd" class="tab">
 <div class="card">
+<h2>📅 Key dates (Batch C Stream I, 2026)</h2>
+<ul><li>Camp opens: <b>Wed 30 Sept</b></li><li>Registration closes: midnight <b>Fri 2 Oct</b></li><li>Swearing-in: <b>Fri 2 Oct</b></li><li>Camp closes: <b>Tue 20 Oct</b></li></ul>
+<p style="font-size:13px;color:var(--mu);margin:8px 0 0">From NYSC's mid-September announcement. Confirm with your call-up letter and your state NYSC office. Arriving late? Go straight to camp and explain to the officials.</p>
+</div>
+<div class="card">
 <h2>🎒 Camp checklist</h2>
 <p style="margin:0 0 6px;color:var(--mu);font-size:14px">Tap to tick. Your progress is saved on this phone.</p>
 <div id="cl"></div>
@@ -143,9 +157,40 @@ header{position:relative}
 <li>Collect your kit and accommodation slot, and get your platoon.</li>
 </ol>
 </div>
+<div class="card">
+<h2>🏕️ Camp life</h2>
+<details open><summary>What a normal day looks like</summary><p>Early wake-up (bugle), morning parade and drills, physical training, lectures, skills training (SAED), then sports, cultural and social activities. Exact times differ by camp. Sundays are often lighter, with fellowship and rest.</p></details>
+<details><summary>Your first 3 days</summary><ul><li>Registration: document screening, medical check, then your platoon and accommodation.</li><li>Swearing-in is on Friday, 2 October.</li><li>Keep your call-up letter and photocopies with you.</li></ul></details>
+<details><summary>Camp market (Mammy market)</summary><p>Food, snacks, drinks, toiletries and small items are sold inside camp. Prices differ by camp, so ask around and agree the price before you buy. Carry small cash and don't show large sums.</p></details>
+<details><summary>Rules to respect</summary><ul><li>Don't leave camp without permission. If you must, ask your platoon officer for an exeat (permission to leave).</li><li>No vehicles or motorbikes inside camp.</li><li>No drugs. Being rude to camp officials can bring punishment.</li><li>Wear the right kit for each activity, usually white kit for parade and drills.</li><li>Follow instructions from camp officials. Discipline is strict.</li></ul></details>
+<details><summary>Health and safety in camp</summary><ul><li>Drink water, wash your hands and eat properly.</li><li>Report illness early at the camp clinic.</li><li>Padlock your box. Keep your phone, ATM card and documents secure.</li><li>Never give your ATM PIN, OTP or bank details to anyone.</li><li>Be careful with strangers offering "help", quick money or favours.</li><li>Report theft or harassment to your platoon officer or camp officials.</li></ul></details>
+<details><summary>Skills training (SAED)</summary><p>NYSC runs Skills Acquisition and Entrepreneurship Development training during camp. Pick a skill you would really use after service, and take the sessions seriously.</p></details>
+<details><summary>Phone, money and visitors</summary><ul><li>Bring a power bank; charging points can be crowded.</li><li>Bring enough cash. Banks and ATMs may be far or limited.</li><li>Visitors are usually met at a designated visitors' area, not in the hostels.</li></ul></details>
+<div class="warn" style="margin:12px 0 0">Camp rules can differ by state. Follow your camp officials and NYSC's official channels.</div>
+</div>
+<div class="card">
+<h2>➡️ After camp: your service year</h2>
+<details open><summary>Posting day and your PPA</summary><ul><li>At the end of camp you are posted to a <b>PPA</b> (Place of Primary Assignment): a school, hospital, government office, company or organization.</li><li>Report to your PPA promptly and complete the documentation. Keep your call-up letter, posting letter and photocopies together.</li><li>If your PPA rejects you, take their rejection to your LGI. NYSC will help you get another PPA.</li></ul></details>
+<details><summary>Register with your LGI</summary><p>The <b>LGI</b> (Local Government Inspector) is your NYSC contact in your local government. Register with them as soon as you arrive. They help with PPA problems, clearance and welfare issues.</p></details>
+<details><summary>CDS (Community Development Service)</summary><ul><li>Every corper joins a CDS group and attends one weekday a week. It is often Thursday, so confirm with your LGI.</li><li>Attendance is compulsory. Missing too many days can delay your clearance and allowance.</li><li>Dues and fines differ by group, so ask the executives what they are before you pay.</li></ul></details>
+<details><summary>Monthly clearance and allowance</summary><ul><li>Each month your PPA gives you a clearance form to sign. You need it to receive your allowance, so complete it early.</li><li>The federal allowance is <b>₦77,000</b> a month. It is usually paid late in the month, and your first payment after camp can come later.</li><li>Some states and PPAs add extra pay. Ask your LGI what applies to you.</li><li>Make sure your bank details are correct, so payment isn't delayed.</li></ul></details>
+<details><summary>Travelling during your service year</summary><p>Do not travel outside your state without permission. You need approval from your PPA and from the state NYSC office. Avoid night travel, and use the Safety tab before any trip.</p></details>
+<details><summary>Changing your posting (redeployment)</summary><p>Corpers can apply for redeployment for reasons like health (with medical proof), marriage, or security concerns. You can apply during camp or soon after it. NYSC reviews each request, so don't assume it will be approved. Ask your camp officials about the process and deadlines.</p></details>
+<details><summary>Find a room near your PPA</summary><p>Use the Housing tab to find a roommate or a place to share, and read the "Before you pay for a house" warning first.</p><button class="btn alt" data-go2="hs">🏠 Go to Housing</button></details>
+<details><summary>Keep your records</summary><p>Keep copies of your posting letter, PPA acceptance letter, clearance forms and CDS attendance. You'll need them when you complete service.</p></details>
+<div class="warn" style="margin:12px 0 0">Processes can differ by state and PPA. Your LGI and your state NYSC office have the final say.</div>
+</div>
 </section>
 
 <section id="t-hs" class="tab">
+<div class="card">
+<h2>🔎 Rooms to share</h2>
+<p style="margin:0;font-size:14px;color:var(--mu)">Corpers who already have a room and need a roommate. Listings are reviewed before they appear.</p>
+<label for="rst">State</label><select id="rst"></select>
+<div id="rooms" style="margin-top:4px"></div>
+<a id="rl" class="btn" target="_blank" rel="noopener">➕ List my room</a>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Your WhatsApp number shows publicly on your listing. Don't put your full address.</p>
+</div>
 <div class="card">
 <h2>🏠 Find a room or roommate</h2>
 <p style="margin:0;font-size:14px;color:var(--mu)">Fill this in, then post it in your state group. Corpers will reply to you on WhatsApp.</p>
@@ -213,6 +258,19 @@ header{position:relative}
 <li>Test SOS with a friend before you travel.</li>
 </ul>
 </div>
+<div class="card" style="border:2px solid #d92d20">
+<h3 style="margin-top:0;color:#d92d20">🚨 Scams targeting corpers</h3>
+<p style="margin:0 0 8px;font-size:14px"><b>Golden rule:</b> NYSC has said deployment, posting, relocation, and camp services like accommodation and feeding are free. Nobody can sell you a posting or a redeployment.</p>
+<details open><summary>"Pay for posting or redeployment"</summary><p>Fake agents and fake "NYSC" accounts offer concessional posting, redeployment or age reduction for money. NYSC says requests are treated on merit and never for a fee. Don't pay anyone.</p></details>
+<details><summary>Fake links, websites and pages</summary><p>Scammers send links asking you to log in to "check your deployment". Use only the official NYSC portal and verified NYSC accounts. Never type your login details on a link sent to you.</p></details>
+<details><summary>Fake notices and letters</summary><p>Fake "URGENT NOTICE" messages on fake letterheads circulate every batch. Before you act on any notice, confirm it with your camp officials, your state NYSC office or your LGI.</p></details>
+<details><summary>Fake medical reports</summary><p>Buying a medical certificate or faking a report is fraud and can land you in trouble. Get a fitness certificate only from a recognised public health facility.</p></details>
+<details><summary>"NYSC kit" sellers</summary><p>NYSC has said kit items issued in camp are free. Be careful paying strangers who sell "official" kits or camp "slots".</p></details>
+<details><summary>Bank, OTP and ATM tricks</summary><p>No one from NYSC, your bank or a "posting office" needs your ATM PIN, OTP or BVN. If you already paid a scammer, tell your bank immediately and report to the police.</p></details>
+<details><summary>Fake rooms and transport</summary><p>Read "Before you pay for a house" in the Housing tab and "Before you board" in the Rides tab.</p></details>
+<a class="btn alt" target="_blank" rel="noopener" href="https://wa.me/2349151423673?text=%F0%9F%9A%A8%20Scam%20report%20(Corper%20Hub)%0A%0AWhat%20happened%3A%20%0AWhere%20(WhatsApp%2C%20link%2C%20call)%3A%20%0A">🚨 Report a scam to the Corper Hub team</a>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Don't send your PIN, OTP or ID numbers in a report.</p>
+</div>
 </section>
 
 <section id="t-sh" class="tab">
@@ -223,6 +281,13 @@ header{position:relative}
 </div>
 </section>
 
+<div class="card" style="text-align:center;margin-top:4px">
+<b>Know a corper who is travelling?</b>
+<button class="btn" id="shs">📲 Share status image</button>
+<label for="sst" style="text-align:left">Tell my state group</label><select id="sst"></select>
+<button class="btn alt" id="sgp">📣 Copy &amp; post in my state group</button>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Post once per group and follow the group rules.</p>
+</div>
 <div class="card" style="text-align:center;margin-top:4px">
 <b>Got an idea or found a problem?</b>
 <a id="fb" class="btn alt" target="_blank" rel="noopener">💡 Suggest a feature / report a problem</a>
@@ -246,19 +311,21 @@ header{position:relative}
 <button data-t="ride"><b>🚌</b>Rides</button>
 <button data-t="hs"><b>🏠</b>Housing</button>
 <button data-t="sos"><b>🆘</b>Safety</button>
-<button data-t="gd"><b>🎒</b>Checklist</button>
+<button data-t="gd"><b>🎒</b>Camp</button>
 
 </nav>
 <script>
 var S=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
-var ITEMS=["Printed call-up letter","Original credentials + photocopies","Valid ID / school ID","Passport photographs","White T-shirts and white shorts","White socks and white canvas shoes","Mattress, bedsheet, pillow","Mosquito net","Padlock (for your box)","Bucket, plate, cup, spoon","Toiletries, towel, sandals","Torch and power bank","Cash + ATM card","Personal drugs / first aid","Flask or water bottle","Phone charger"];
+var ITEMS=["Printed call-up letter","Original credentials + photocopies","Valid ID / school ID","Passport photographs","White T-shirts and white shorts","White socks and white canvas shoes","Bedsheet and pillow (check if your camp allows a mattress)","Mosquito net","Padlock (for your box)","Bucket, plate, cup, spoon","Toiletries, towel, sandals","Torch and power bank","Cash + ATM card","Personal drugs / first aid","Flask or water bottle","Phone charger","Waist pouch and ID card holder"];
+var CAMP={"Abia":"Umunna, Bende LGA, Abia State","Adamawa":"Damare, Girei LGA, Adamawa State","Akwa Ibom":"Ikot Itie Udung, Nsit Atai LGA, Akwa Ibom State","Anambra":"","Bauchi":"Wailo, Ganjuwa LGA, Bauchi State","Bayelsa":"Boro, Kolokuma/Opokuma LGA, Bayelsa State","Benue":"Wannune, Tarka LGA, Benue State","Borno":"Maiduguri, Borno State","Cross River":"Obubra, Cross River State","Delta":"Issele-Uku, Aniocha North LGA, Delta State","Ebonyi":"Macgregor College, Afikpo, Ebonyi State","Edo":"Okada, Ovia North-East LGA, Edo State","Ekiti":"Ise-Orun/Emure LGA, Ekiti State","Enugu":"Awgu, Enugu State","FCT Abuja":"Kubwa, Bwari Area Council, Abuja (FCT)","Gombe":"Akko LGA, Gombe State","Imo":"Eziama Obaire, Nkwerre LGA, Imo State","Jigawa":"Fanisau, Dutse LGA, Jigawa State","Kaduna":"Kaduna-Abuja Road, Kaduna State","Kano":"Kusala Dam, Karaye LGA, Kano State","Katsina":"Mani Road, Katsina State","Kebbi":"Dakingari, Suru LGA, Kebbi State","Kogi":"Asaya, Kabba LGA, Kogi State","Kwara":"Yikpata, Edu LGA, Kwara State","Lagos":"Iyana-Ipaja, Agege, Lagos State","Nasarawa":"Keffi, Nasarawa State","Niger":"Paiko, Paikoro LGA, Niger State","Ogun":"Ikenne Road, Sagamu, Ogun State","Ondo":"Ikare-Akoko, Ondo State","Osun":"Ede, Osun State","Oyo":"Iseyin, Oyo State","Plateau":"Mangu, Plateau State","Rivers":"Nonwa-Gbam, Tai LGA, Rivers State","Sokoto":"Wamakko, Sokoto State","Taraba":"Sibre Airport Road, Jalingo, Taraba State","Yobe":"Potiskum, Yobe State","Zamfara":"Tsafe, Zamfara State"};
+function cq(){var c=CAMP[sel.value];return c?"NYSC Permanent Orientation Camp, "+c:"NYSC Permanent Orientation Camp "+sel.value}
 var $=function(i){return document.getElementById(i)};
 var site=location.href.split("#")[0];
 /* directions */
 var sel=$("st");
 S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;sel.appendChild(o)});
 function maps(){
-var q=encodeURIComponent("NYSC Permanent Orientation Camp "+sel.value);
+var q=encodeURIComponent(cq());var c0=CAMP[sel.value];$("camploc").textContent=c0?"📍 Camp: "+c0:"📍 Camp: confirm the exact location on your call-up letter";
 $("go").href="https://www.google.com/maps/dir/?api=1&destination="+q;
 if($("mbox").style.display=="block")showMap();
 }
@@ -338,7 +405,7 @@ function showMap(){
 $("mbox").style.display="block";
 if(!navigator.onLine){$("mn").textContent="You are offline. Connect to data to load the map.";$("mf").removeAttribute("src");return}
 $("mn").textContent="The pin shows the camp area. Confirm the exact camp with your call-up letter.";
-$("mf").src="https://www.google.com/maps?q="+encodeURIComponent("NYSC Permanent Orientation Camp "+sel.value)+"&output=embed"}
+$("mf").src="https://www.google.com/maps?q="+encodeURIComponent(cq())+"&output=embed"}
 $("see").onclick=showMap;
 /* housing */
 var hs=$("hst");
@@ -349,6 +416,7 @@ sel.onchange=maps;s2.onchange=function(){sel.value=s2.value;maps()};hs.onchange=
 $("hm").onchange=function(){var v=$("hm").value=="have";$("hspw").style.display=v?"block":"none";$("hbl").textContent=v?"Rent (₦)":"Your budget (₦)";$("hb").placeholder=v?"e.g. 100,000 per year, per person":"e.g. 150,000 per year"};
 $("hmk").onclick=function(){
 var have=$("hm").value=="have",a=$("ha").value.trim(),b=$("hb").value.trim(),w=$("hw").value.trim();
+if(!sel.value){alert("Please choose your state first.");return}
 if(!a||!w){alert("Please enter the area and your WhatsApp number.");return}
 var d=$("hd").value,g=$("hg").value,sp=$("hsp").value;
 var m=(have?"🏠 ROOM / SPACE TO SHARE (NYSC)":"🏠 ROOM / ROOMMATE NEEDED (NYSC)")+"\nState: "+sel.value+"\nArea: "+a+(b?"\n"+(have?"Rent: ₦":"Budget: ₦")+b.replace(/^₦/,""):"")+(have&&sp?"\nSpaces: "+sp:"")+(d?"\n"+(have?"Available from: ":"Move-in: ")+d:"")+"\nPreference: "+g+"\nWhatsApp: "+w+"\n\n"+(have?"Serious corpers only. Please see the place in daylight, and let us meet in a public place first.":"Any corper with a room or space to share? Message me. I will meet in a public place first.")+"\n\nMore corper tools: "+site;
@@ -356,13 +424,80 @@ $("hpv").textContent=m;$("hsh").href="https://wa.me/?text="+encodeURIComponent(m
 $("hshare").href=$("shr").href;
 function old(t){var x=document.createElement("textarea");x.value=t;x.style.cssText="position:fixed;opacity:0";document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(x)}
 function cp(t){try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).catch(function(){old(t)});return}}catch(e){}old(t)}
-function post(m){cp(m);var c=G[sel.value];$("gmt").textContent=m;$("gms").textContent=sel.value;var a=$("gmo");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.onclick=function(){cp(m)};var b=$("gmc");b.textContent="Copy message again";b.onclick=function(){cp(m);b.textContent="✅ Copied"};$("gm").style.display="flex"}
+function post(m){if(!sel.value){alert("Please choose your state first.");return}cp(m);var c=G[sel.value];$("gmt").textContent=m;$("gms").textContent=sel.value;var a=$("gmo");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.onclick=function(){cp(m)};var b=$("gmc");b.textContent="Copy message again";b.onclick=function(){cp(m);b.textContent="✅ Copied"};$("gm").style.display="flex"}
 $("gmx").onclick=function(){$("gm").style.display="none"};
 $("hgo").onclick=function(){post($("hpv").textContent)};
 $("rgo").onclick=function(){post($("pv").textContent)};
 maps();
 function fb(){$("fb").href="https://wa.me/2349151423673?text="+encodeURIComponent("Hello Corper Hub 👋\nState: "+sel.value+"\n\nMy suggestion / problem:\n")}
 document.addEventListener("change",fb);fb();
+if(new Date()>new Date("2026-10-21T00:00:00+01:00")){var dt=$("dates");if(dt)dt.style.display="none"}
+document.querySelectorAll("[data-go2]").forEach(function(b){b.onclick=function(){document.querySelector('nav button[data-t="'+b.dataset.go2+'"]').click()}});
+var ROOMS_CSV="",ROOMS_FORM="",ROWS=null;
+function csv(t){var r=[],row=[],c="",q=false;
+for(var i=0;i<t.length;i++){var ch=t[i];
+if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
+else if(ch=='"')q=true;
+else if(ch==","){row.push(c);c=""}
+else if(ch=="\n"||ch=="\r"){if(ch=="\r"&&t[i+1]=="\n")i++;row.push(c);c="";if(row.length>1||row[0])r.push(row);row=[]}
+else c+=ch}
+row.push(c);if(row.length>1||row[0])r.push(row);return r}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
+function showRooms(){
+var box=$("rooms");box.textContent="";
+if(!ROOMS_CSV){box.appendChild(el("p","m","Room listings will appear here soon. Be one of the first to list."));return}
+if(!ROWS){return}
+var st=sel.value.toLowerCase(),n=0;
+ROWS.forEach(function(r){
+if(st&&(r["state"]||"").toLowerCase()!=st)return;
+if(n>=30)return;n++;
+var d=el("div","room");
+d.appendChild(el("div","t",(r["area"]||"Room")+" · "+(r["state"]||"")));
+var rent=r["rent"]||"";if(/^[0-9]/.test(rent))rent="₦"+rent;
+var bits=[rent,r["spaces"]?r["spaces"]+" space(s)":"",r["available from"]?"From "+r["available from"]:"",r["preference"]||""].filter(Boolean);
+if(bits.length)d.appendChild(el("div","m",bits.join(" · ")));
+if(r["about the room"])d.appendChild(el("p","",r["about the room"]));
+var num10=(r["whatsapp"]||"").replace(/\D/g,"");
+if(num10.length>=10){
+var a=el("a","btn","💬 Message on WhatsApp");a.style.marginTop="8px";a.target="_blank";a.rel="noopener";
+a.href=wa("Hello, I saw your room listing ("+(r["area"]||"")+") on Corper Hub. Is it still available?",num10);d.appendChild(a)}
+d.appendChild(el("div","m","Inspect in daylight. Never pay before you see the room."));
+var rp=el("a","m","Report this listing");rp.target="_blank";rp.rel="noopener";
+rp.href=wa("🚨 Report a listing on Corper Hub\nArea: "+(r["area"]||"")+"\nState: "+(r["state"]||"")+"\nReason: ","2349151423673".replace(/^/,""));
+d.appendChild(rp);box.appendChild(d)});
+if(!n)box.appendChild(el("p","m",sel.value?"No rooms listed in "+sel.value+" yet.":"No rooms listed yet."))}
+function loadRooms(){
+if(!ROOMS_CSV||ROWS){showRooms();return}
+$("rooms").textContent="Loading rooms...";
+fetch(ROOMS_CSV).then(function(r){return r.text()}).then(function(t){
+var a=csv(t),hd=a.shift().map(function(x){return x.trim().toLowerCase()});
+ROWS=a.map(function(r){var o={};hd.forEach(function(k,i){o[k]=(r[i]||"").trim()});return o}).filter(function(o){return (o["approved"]||"").toLowerCase()=="yes"});
+showRooms()}).catch(function(){$("rooms").textContent="Could not load rooms. Check your connection and try again."})}
+$("rl").href=ROOMS_FORM||wa("🏠 I want to list a room on Corper Hub\nState: \nArea: \nRent: \nSpaces available: \nAvailable from: \nPreference (any / male / female): \nAbout the room: \nMy WhatsApp number: ","2349151423673");
+document.querySelector('nav button[data-t="hs"]').addEventListener("click",loadRooms);
+var rst=$("rst");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;rst.appendChild(o)});
+var sst=$("sst");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;sst.appendChild(o)});
+[sel,s2,hs,sst,rst].forEach(function(x){var o=document.createElement("option");o.value="";o.textContent="Choose your state";x.insertBefore(o,x.firstChild)});
+rst.firstChild.textContent="All states";
+var m3=maps;
+maps=function(){m3();var e=!sel.value;sst.value=sel.value;rst.value=sel.value;if(ROWS||!ROOMS_CSV)showRooms();
+$("go").style.display=$("see").style.display=e?"none":"";
+if(e){$("camploc").textContent="👆 Choose your state to see your camp, directions and group";$("mbox").style.display="none";$("hgo").textContent=$("rgo").textContent="📋 Copy & post in your state group"}
+else{try{localStorage.setItem("stt",sel.value)}catch(x){}}};
+sel.onchange=maps;s2.onchange=function(){sel.value=s2.value;maps()};hs.onchange=function(){sel.value=hs.value;maps()};sst.onchange=function(){sel.value=sst.value;maps()};rst.onchange=function(){sel.value=rst.value;maps()};
+var st0="";try{st0=localStorage.getItem("stt")||""}catch(e){}
+sel.value=CAMP.hasOwnProperty(st0)?st0:"";maps();
+var SHARE="🇳🇬 NYSC corpers: find your camp, directions, travel buddies, your state group and a safety SOS button here 👇\n"+site;
+var GM="🇳🇬 *NYSC CORPERS:* a free site for camp directions, travel buddies, your state group, a camp guide and an 🆘 SOS button that sends your location to people you trust.\n\n👉 "+site+"\n\nTravel in daylight and send the vehicle plate number to someone you trust before you board.";
+$("sgp").onclick=function(){post(GM)};
+$("shs").onclick=function(){
+fetch("corper-hub-status.png").then(function(r){return r.blob()}).then(function(b){
+var f=new File([b],"corper-hub.png",{type:"image/png"});
+if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f],text:SHARE})}
+cp(SHARE);var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="corper-hub-status.png";document.body.appendChild(a);a.click();a.remove();
+alert("Image saved and caption copied. Open WhatsApp, tap Status, pick the image and paste the caption.")}).catch(function(){})};
 gl();refresh();
 /* pwa */
 var dp=null,isS=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
