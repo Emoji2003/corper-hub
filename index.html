@@ -51,8 +51,19 @@ details:last-of-type{border:0}
 summary{cursor:pointer;font-weight:700;font-size:15px}
 details p,details ul{margin:8px 0 0;font-size:14px}
 .room{border:1px solid var(--bd);border-radius:12px;padding:12px;margin-top:10px}
-.room .t{font-weight:700}
+.room .t{font-weight:700;font-size:16px}
+.chip{display:inline-block;background:var(--g2);color:var(--g);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin:0 6px 6px 0}
+.strip{display:flex;gap:8px;overflow-x:auto;margin-bottom:8px}
+.strip img{height:170px;width:auto;border-radius:10px;flex:none;background:var(--g2);cursor:pointer}
+.rent{color:var(--g);font-weight:800;font-size:18px;margin-top:2px}
 .room .m{font-size:13px;color:var(--mu);margin-top:4px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;text-align:left;color:var(--tx);font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:4px;text-decoration:none}
+.tile span{font-size:26px}.tile b{font-size:15px}.tile small{font-size:12px;color:var(--mu)}
+.seg{display:flex;gap:8px;margin-bottom:12px}
+.seg button{flex:1;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:10px;font-weight:600;font-size:14px;cursor:pointer}
+.seg button.on{background:var(--g);color:#fff;border-color:var(--g)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button.on{color:#06210f}}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -61,12 +72,42 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <header>
 <a id="hshare" class="hshare" target="_blank" rel="noopener">📤 Share</a>
 <h1>🇳🇬 Corper Hub</h1>
-<p>Directions to camp, travel buddies, and a camp checklist, all in one place.</p>
+<p>Camp, rides, rooms and safety in one place.</p>
 </header>
 <main>
 
-<section id="t-dir" class="tab on">
-<div id="dates" class="card" style="background:var(--g2)"><b>📅 Batch C Stream I camp:</b> 30 Sept to 20 Oct 2026. Registration closes at midnight on <b>Fri 2 Oct</b>, and swearing-in is the same day. NYSC advises <b>no night travel</b> and boarding only at designated motor parks.</div>
+<section id="t-home" class="tab on">
+<div class="card">
+<label for="h0s" style="margin-top:0">Your posted state</label>
+<select id="h0s"></select>
+<p id="h0n" style="margin:10px 0 0;font-size:14px;font-weight:600"></p>
+</div>
+<div id="dates" class="card" style="background:var(--g2)"></div>
+<div class="tiles">
+<button class="tile" data-to="dir"><span>🧭</span><b>Get to camp</b><small>Directions and map</small></button>
+<button class="tile" data-to="ride"><span>🚌</span><b>Travel buddies</b><small>Find people to travel with</small></button>
+<button class="tile" data-to="hs"><span>🏠</span><b>Find a room</b><small>Rooms to share</small></button>
+<button class="tile" data-to="gd"><span>🎒</span><b>Camp and after</b><small>Checklist and guides</small></button>
+<button class="tile" data-to="sos"><span>🛡️</span><b>Stay safe</b><small>SOS and scam alerts</small></button>
+<a class="tile" id="grp0" target="_blank" rel="noopener"><span>💬</span><b>State group</b><small>Join on WhatsApp</small></a>
+</div>
+<div class="card" style="text-align:center;margin-top:4px">
+<b>Know a corper who is travelling?</b>
+<button class="btn" id="shs">📲 Share status image</button>
+<select id="sst" style="display:none"></select>
+<button class="btn alt" id="sgp">📣 Copy &amp; post in my state group</button>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Post once per group and follow the group rules.</p>
+</div>
+<div class="card" style="text-align:center;margin-top:4px">
+<b>Got an idea or found a problem?</b>
+<a id="fb" class="btn alt" target="_blank" rel="noopener">💡 Suggest a feature / report a problem</a>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Opens WhatsApp to the Corper Hub team.</p>
+</div>
+</section>
+
+<section id="t-dir" class="tab">
+<div class="seg"><button data-to="dir" class="on">📍 Directions</button><button data-to="ride">🚌 Travel buddies</button></div>
+
 <div class="bb"></div>
 <div class="card">
 <h2>📍 Directions to your camp</h2>
@@ -96,7 +137,8 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 </section>
 
 <section id="t-ride" class="tab">
-<div class="bb"></div>
+<div class="seg"><button data-to="dir">📍 Directions</button><button data-to="ride" class="on">🚌 Travel buddies</button></div>
+
 <div class="card">
 <h2>🚌 Find people to travel with</h2>
 <p style="margin:0;color:var(--mu);font-size:14px">Fill this in, then post it in your state group. Corpers on the same route will reply to you directly.</p>
@@ -118,7 +160,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <div class="card">
 <h3>💬 Corpers posted to your state</h3>
 <p style="margin:0;font-size:14px;color:var(--mu)">Join your state group to meet people going the same way. Post your travel message there too.</p>
-<label for="st2">Your posted state</label><select id="st2"></select>
+<select id="st2" style="display:none"></select>
 <a id="grp2" class="btn" target="_blank" rel="noopener" style="display:none"></a>
 <div class="warn" style="margin-top:12px">Public groups are open to strangers. Never send money, documents or your home address to anyone in a group, and be careful who you travel with.</div>
 </div>
@@ -138,9 +180,9 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 
 <section id="t-gd" class="tab">
 <div class="card">
-<h2>📅 Key dates (Batch C Stream I, 2026)</h2>
-<ul><li>Camp opens: <b>Wed 30 Sept</b></li><li>Registration closes: midnight <b>Fri 2 Oct</b></li><li>Swearing-in: <b>Fri 2 Oct</b></li><li>Camp closes: <b>Tue 20 Oct</b></li></ul>
-<p style="font-size:13px;color:var(--mu);margin:8px 0 0">From NYSC's mid-September announcement. Confirm with your call-up letter and your state NYSC office. Arriving late? Go straight to camp and explain to the officials.</p>
+<h2>📅 Key dates (Batch C, 2026)</h2>
+<p style="margin:0;font-weight:600">Stream I</p><ul><li>Camp opens: <b>Wed 30 Sept</b></li><li>Registration closes: midnight <b>Fri 2 Oct</b></li><li>Swearing-in: <b>Fri 2 Oct</b></li><li>Camp closes: <b>Tue 20 Oct</b></li></ul><p style="margin:8px 0 0;font-weight:600">Stream II</p><ul><li>Camp opens: <b>Wed 4 Nov</b></li><li>Registration closes: midnight <b>Fri 6 Nov</b></li><li>Swearing-in: <b>Fri 6 Nov</b></li><li>Camp closes: <b>Tue 24 Nov</b></li></ul>
+<p style="font-size:13px;color:var(--mu);margin:8px 0 0">From NYSC's announcements. Confirm with your call-up letter and your state NYSC office. Arriving late? Go straight to camp and explain to the officials.</p>
 </div>
 <div class="card">
 <h2>🎒 Camp checklist</h2>
@@ -160,7 +202,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <div class="card">
 <h2>🏕️ Camp life</h2>
 <details open><summary>What a normal day looks like</summary><p>Early wake-up (bugle), morning parade and drills, physical training, lectures, skills training (SAED), then sports, cultural and social activities. Exact times differ by camp. Sundays are often lighter, with fellowship and rest.</p></details>
-<details><summary>Your first 3 days</summary><ul><li>Registration: document screening, medical check, then your platoon and accommodation.</li><li>Swearing-in is on Friday, 2 October.</li><li>Keep your call-up letter and photocopies with you.</li></ul></details>
+<details><summary>Your first 3 days</summary><ul><li>Registration: document screening, medical check, then your platoon and accommodation.</li><li>Swearing-in is on the last day of registration (see the key dates above).</li><li>Keep your call-up letter and photocopies with you.</li></ul></details>
 <details><summary>Camp market (Mammy market)</summary><p>Food, snacks, drinks, toiletries and small items are sold inside camp. Prices differ by camp, so ask around and agree the price before you buy. Carry small cash and don't show large sums.</p></details>
 <details><summary>Rules to respect</summary><ul><li>Don't leave camp without permission. If you must, ask your platoon officer for an exeat (permission to leave).</li><li>No vehicles or motorbikes inside camp.</li><li>No drugs. Being rude to camp officials can bring punishment.</li><li>Wear the right kit for each activity, usually white kit for parade and drills.</li><li>Follow instructions from camp officials. Discipline is strict.</li></ul></details>
 <details><summary>Health and safety in camp</summary><ul><li>Drink water, wash your hands and eat properly.</li><li>Report illness early at the camp clinic.</li><li>Padlock your box. Keep your phone, ATM card and documents secure.</li><li>Never give your ATM PIN, OTP or bank details to anyone.</li><li>Be careful with strangers offering "help", quick money or favours.</li><li>Report theft or harassment to your platoon officer or camp officials.</li></ul></details>
@@ -187,6 +229,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <h2>🔎 Rooms to share</h2>
 <p style="margin:0;font-size:14px;color:var(--mu)">Corpers who already have a room and need a roommate. Listings are reviewed before they appear.</p>
 <label for="rst">State</label><select id="rst"></select>
+<label for="rq">Search area</label><input id="rq" placeholder="e.g. Barnawa, Ikeja, near my PPA">
 <div id="rooms" style="margin-top:4px"></div>
 <a id="rl" class="btn" target="_blank" rel="noopener">➕ List my room</a>
 <p style="font-size:12px;color:var(--mu);margin:8px 0 0">Your WhatsApp number shows publicly on your listing. Don't put your full address.</p>
@@ -196,7 +239,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <p style="margin:0;font-size:14px;color:var(--mu)">Fill this in, then post it in your state group. Corpers will reply to you on WhatsApp.</p>
 <label for="hm">What do you need?</label>
 <select id="hm"><option value="need">I need a room or roommate</option><option value="have">I have a room or space to share</option></select>
-<label for="hst">State</label><select id="hst"></select>
+<select id="hst" style="display:none"></select>
 <label for="ha">Area / close to</label><input id="ha" placeholder="e.g. near my PPA, Barnawa">
 <label for="hb" id="hbl">Your budget (₦)</label><input id="hb" placeholder="e.g. 150,000 per year">
 <div id="hspw" style="display:none"><label for="hsp">Spaces available</label><input id="hsp" type="number" inputmode="numeric" min="1" placeholder="e.g. 2"></div>
@@ -281,19 +324,28 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 </div>
 </section>
 
-<div class="card" style="text-align:center;margin-top:4px">
-<b>Know a corper who is travelling?</b>
-<button class="btn" id="shs">📲 Share status image</button>
-<label for="sst" style="text-align:left">Tell my state group</label><select id="sst"></select>
-<button class="btn alt" id="sgp">📣 Copy &amp; post in my state group</button>
-<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Post once per group and follow the group rules.</p>
-</div>
-<div class="card" style="text-align:center;margin-top:4px">
-<b>Got an idea or found a problem?</b>
-<a id="fb" class="btn alt" target="_blank" rel="noopener">💡 Suggest a feature / report a problem</a>
-<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Opens WhatsApp to the Corper Hub team.</p>
-</div>
 </main>
+<div id="lm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;align-items:flex-start;justify-content:center;padding:12px;overflow:auto">
+<div class="card" style="max-width:460px;width:100%;margin:0">
+<h2>➕ List my room</h2>
+<p style="margin:0;font-size:14px;color:var(--mu)">Add 1 to 3 photos of the real room. Your photos and WhatsApp number show publicly once approved.</p>
+<label for="ls">State</label><select id="ls"></select>
+<label for="la">Area</label><input id="la" placeholder="e.g. Barnawa, near the junction">
+<label for="lt">Room type</label><select id="lt"><option>Self-contained</option><option>Room and parlour</option><option>Shared room</option><option>Other</option></select>
+<label for="lr">Rent</label><input id="lr" placeholder="e.g. 150,000 per year, per person">
+<label for="lsp">Spaces available</label><input id="lsp" type="number" inputmode="numeric" min="1" placeholder="e.g. 1">
+<label for="ld">Available from</label><input id="ld" type="date">
+<label for="lp">Preference</label><select id="lp"><option>No preference</option><option>Male only</option><option>Female only</option></select>
+<label for="lab">About the room</label><input id="lab" placeholder="e.g. tiled, prepaid meter, water in compound">
+<label for="lw">Your WhatsApp number</label><input id="lw" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
+<label for="lph">Photos of the room (1 to 3)</label><input id="lph" type="file" accept="image/*" multiple>
+<input id="lh" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<label style="display:flex;gap:10px;align-items:flex-start;color:inherit;font-size:14px;margin-top:12px"><input id="lc" type="checkbox" style="width:22px;height:22px;flex:none"><span>I agree my photos and WhatsApp number will show publicly, and the photos show the real room.</span></label>
+<p id="lst" style="font-size:14px;margin:10px 0 0"></p>
+<button class="btn" id="lsub">Submit my listing</button>
+<button class="btn alt" id="lx">Close</button>
+</div></div>
+<div id="lb" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;align-items:center;justify-content:center;padding:12px"><img id="lbi" alt="Room photo" style="max-width:100%;max-height:100%;border-radius:8px"></div>
 <div id="gm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;align-items:center;justify-content:center;padding:16px">
 <div class="card" style="max-width:420px;width:100%;margin:0;max-height:90vh;overflow:auto">
 <h2>✅ Message copied</h2>
@@ -307,12 +359,11 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <a id="fab" class="fab" target="_blank" rel="noopener" aria-label="Send emergency alert">SOS</a>
 <button id="inst" class="inst" style="display:none">📲 Install app</button><div id="ins" class="card ins" style="display:none"></div>
 <nav>
-<button data-t="dir" class="on"><b>📍</b>Directions</button>
-<button data-t="ride"><b>🚌</b>Rides</button>
-<button data-t="hs"><b>🏠</b>Housing</button>
-<button data-t="sos"><b>🆘</b>Safety</button>
+<button data-t="home" class="on"><b>🏠</b>Home</button>
+<button data-t="dir"><b>🧭</b>Travel</button>
+<button data-t="hs"><b>🛏️</b>Rooms</button>
 <button data-t="gd"><b>🎒</b>Camp</button>
-
+<button data-t="sos"><b>🛡️</b>Safety</button>
 </nav>
 <script>
 var S=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
@@ -431,50 +482,72 @@ $("rgo").onclick=function(){post($("pv").textContent)};
 maps();
 function fb(){$("fb").href="https://wa.me/2349151423673?text="+encodeURIComponent("Hello Corper Hub 👋\nState: "+sel.value+"\n\nMy suggestion / problem:\n")}
 document.addEventListener("change",fb);fb();
-if(new Date()>new Date("2026-10-21T00:00:00+01:00")){var dt=$("dates");if(dt)dt.style.display="none"}
 document.querySelectorAll("[data-go2]").forEach(function(b){b.onclick=function(){document.querySelector('nav button[data-t="'+b.dataset.go2+'"]').click()}});
-var ROOMS_CSV="",ROOMS_FORM="",ROWS=null;
-function csv(t){var r=[],row=[],c="",q=false;
-for(var i=0;i<t.length;i++){var ch=t[i];
-if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
-else if(ch=='"')q=true;
-else if(ch==","){row.push(c);c=""}
-else if(ch=="\n"||ch=="\r"){if(ch=="\r"&&t[i+1]=="\n")i++;row.push(c);c="";if(row.length>1||row[0])r.push(row);row=[]}
-else c+=ch}
-row.push(c);if(row.length>1||row[0])r.push(row);return r}
+var ROOMS_API="",CLOUD_NAME="",CLOUD_PRESET="",ROWS=null,OWNER="2349151423673";
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
+function g(r,k){return String(r[k]==null?"":r[k]).trim()}
+function tUrl(u,w){return u.replace("/upload/","/upload/w_"+w+",c_limit,q_auto,f_auto/")}
+function okImg(u){return CLOUD_NAME&&u.indexOf("https://res.cloudinary.com/"+CLOUD_NAME+"/")==0}
 function showRooms(){
 var box=$("rooms");box.textContent="";
-if(!ROOMS_CSV){box.appendChild(el("p","m","Room listings will appear here soon. Be one of the first to list."));return}
+if(!ROOMS_API){box.appendChild(el("p","m","Room listings will appear here soon. Be one of the first to list."));return}
 if(!ROWS){return}
-var st=sel.value.toLowerCase(),n=0;
+var st=sel.value.toLowerCase(),q=($("rq").value||"").trim().toLowerCase(),n=0;
 ROWS.forEach(function(r){
-if(st&&(r["state"]||"").toLowerCase()!=st)return;
+if(st&&g(r,"state").toLowerCase()!=st)return;
+if(q&&(g(r,"area")+" "+g(r,"about the room")).toLowerCase().indexOf(q)<0)return;
 if(n>=30)return;n++;
 var d=el("div","room");
-d.appendChild(el("div","t",(r["area"]||"Room")+" · "+(r["state"]||"")));
-var rent=r["rent"]||"";if(/^[0-9]/.test(rent))rent="₦"+rent;
-var bits=[rent,r["spaces"]?r["spaces"]+" space(s)":"",r["available from"]?"From "+r["available from"]:"",r["preference"]||""].filter(Boolean);
+var ph=g(r,"photos").split(/\s+/).filter(okImg).slice(0,3);
+if(ph.length){var sp=el("div","strip");ph.forEach(function(u){var im=document.createElement("img");im.loading="lazy";im.alt="Room photo";im.src=tUrl(u,600);im.onclick=function(){$("lbi").src=tUrl(u,1200);$("lb").style.display="flex"};sp.appendChild(im)});d.appendChild(sp)}
+var tp=el("div","");
+if(g(r,"verified").toLowerCase()=="yes")tp.appendChild(el("span","chip","✓ Verified"));
+if(g(r,"room type"))tp.appendChild(el("span","chip",g(r,"room type")));
+if(tp.childNodes.length)d.appendChild(tp);
+d.appendChild(el("div","t",(g(r,"area")||"Room")+" · "+g(r,"state")));
+var rent=g(r,"rent");if(/^[0-9]/.test(rent))rent="₦"+rent;
+if(rent)d.appendChild(el("div","rent",rent));
+var bits=[g(r,"spaces")?g(r,"spaces")+" space(s) available":"",g(r,"available from")?"From "+g(r,"available from"):"",g(r,"preference")].filter(Boolean);
 if(bits.length)d.appendChild(el("div","m",bits.join(" · ")));
-if(r["about the room"])d.appendChild(el("p","",r["about the room"]));
-var num10=(r["whatsapp"]||"").replace(/\D/g,"");
-if(num10.length>=10){
-var a=el("a","btn","💬 Message on WhatsApp");a.style.marginTop="8px";a.target="_blank";a.rel="noopener";
-a.href=wa("Hello, I saw your room listing ("+(r["area"]||"")+") on Corper Hub. Is it still available?",num10);d.appendChild(a)}
-d.appendChild(el("div","m","Inspect in daylight. Never pay before you see the room."));
+if(g(r,"about the room"))d.appendChild(el("p","",g(r,"about the room")));
+var n10=g(r,"whatsapp").replace(/\D/g,"");
+if(n10.length>=10){var a=el("a","btn","💬 Message on WhatsApp");a.style.marginTop="8px";a.target="_blank";a.rel="noopener";a.href=wa("Hello, I saw your room listing ("+g(r,"area")+") on Corper Hub. Is it still available?",n10);d.appendChild(a)}
+d.appendChild(el("div","m","Photos help, but always inspect in daylight. Never pay before you see the room."));
 var rp=el("a","m","Report this listing");rp.target="_blank";rp.rel="noopener";
-rp.href=wa("🚨 Report a listing on Corper Hub\nArea: "+(r["area"]||"")+"\nState: "+(r["state"]||"")+"\nReason: ","2349151423673".replace(/^/,""));
+rp.href=wa("🚨 Report a listing on Corper Hub\nArea: "+g(r,"area")+"\nState: "+g(r,"state")+"\nReason: ",OWNER);
 d.appendChild(rp);box.appendChild(d)});
-if(!n)box.appendChild(el("p","m",sel.value?"No rooms listed in "+sel.value+" yet.":"No rooms listed yet."))}
+if(!n)box.appendChild(el("p","m",(q||sel.value)?"No rooms found for this search yet. Try another area or state.":"No rooms listed yet."))}
 function loadRooms(){
-if(!ROOMS_CSV||ROWS){showRooms();return}
+if(!ROOMS_API||ROWS){showRooms();return}
 $("rooms").textContent="Loading rooms...";
-fetch(ROOMS_CSV).then(function(r){return r.text()}).then(function(t){
-var a=csv(t),hd=a.shift().map(function(x){return x.trim().toLowerCase()});
-ROWS=a.map(function(r){var o={};hd.forEach(function(k,i){o[k]=(r[i]||"").trim()});return o}).filter(function(o){return (o["approved"]||"").toLowerCase()=="yes"});
-showRooms()}).catch(function(){$("rooms").textContent="Could not load rooms. Check your connection and try again."})}
-$("rl").href=ROOMS_FORM||wa("🏠 I want to list a room on Corper Hub\nState: \nArea: \nRent: \nSpaces available: \nAvailable from: \nPreference (any / male / female): \nAbout the room: \nMy WhatsApp number: ","2349151423673");
+fetch(ROOMS_API).then(function(r){return r.json()}).then(function(a){ROWS=Array.isArray(a)?a:[];showRooms()}).catch(function(){$("rooms").textContent="Could not load rooms. Check your connection and try again."})}
+function shrink(f){return new Promise(function(ok,no){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){var k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?ok(b):no()},"image/jpeg",0.72)};im.onerror=no;im.src=u})}
+function upl(b){var f=new FormData();f.append("file",b);f.append("upload_preset",CLOUD_PRESET);return fetch("https://api.cloudinary.com/v1_1/"+CLOUD_NAME+"/image/upload",{method:"POST",body:f}).then(function(r){return r.json()}).then(function(j){if(!j.secure_url)throw 0;return j.secure_url})}
+var ls=$("ls");
+[""].concat(S).forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s||"Choose state";ls.appendChild(o)});
+var RL=$("rl");
+RL.href=wa("🏠 I want to list a room on Corper Hub\nState: \nArea: \nRent: \nSpaces available: \nAvailable from: \nPreference (any / male / female): \nAbout the room: \nMy WhatsApp number: ",OWNER);
+RL.onclick=function(){if(!ROOMS_API||!CLOUD_NAME||!CLOUD_PRESET)return true;ls.value=sel.value||"";$("lm").style.display="flex";return false};
+$("lx").onclick=function(){$("lm").style.display="none"};
+$("lb").onclick=function(){this.style.display="none"};
+$("lsub").onclick=function(){
+var st=$("lst"),b=$("lsub");
+if($("lh").value)return;
+var last=0;try{last=+localStorage.getItem("lastlist")||0}catch(e){}
+if(Date.now()-last<60000){st.textContent="Please wait a minute before submitting again.";return}
+var w=num($("lw").value),fs=Array.prototype.slice.call($("lph").files).slice(0,3);
+if(!ls.value||!$("la").value.trim()||w.length<13||!fs.length||!$("lc").checked){st.textContent="Please fill in the state, area and WhatsApp number, add at least 1 photo, and tick the box.";return}
+b.disabled=true;var urls=[],p=Promise.resolve();
+fs.forEach(function(f,i){p=p.then(function(){st.textContent="Uploading photo "+(i+1)+" of "+fs.length+"...";return shrink(f)}).then(upl).then(function(u){urls.push(u)})});
+p.then(function(){
+st.textContent="Sending your listing...";
+var body={state:ls.value,area:$("la").value.trim(),rent:$("lr").value.trim(),spaces:$("lsp").value.trim(),available:$("ld").value,preference:$("lp").value,type:$("lt").value,about:$("lab").value.trim(),whatsapp:w,photos:urls.join(" ")};
+return fetch(ROOMS_API,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)})}).then(function(){
+try{localStorage.setItem("lastlist",String(Date.now()))}catch(e){}
+st.textContent="✅ Sent! Every listing is reviewed before it appears.";
+b.disabled=false;["la","lr","lsp","lab"].forEach(function(i){$(i).value=""});$("lph").value="";$("lc").checked=false}).catch(function(){st.textContent="Something went wrong. Check your connection and try again.";b.disabled=false})};
 document.querySelector('nav button[data-t="hs"]').addEventListener("click",loadRooms);
+$("rq").oninput=showRooms;
 var rst=$("rst");
 S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;rst.appendChild(o)});
 var sst=$("sst");
@@ -482,7 +555,7 @@ S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textCon
 [sel,s2,hs,sst,rst].forEach(function(x){var o=document.createElement("option");o.value="";o.textContent="Choose your state";x.insertBefore(o,x.firstChild)});
 rst.firstChild.textContent="All states";
 var m3=maps;
-maps=function(){m3();var e=!sel.value;sst.value=sel.value;rst.value=sel.value;if(ROWS||!ROOMS_CSV)showRooms();
+maps=function(){m3();var e=!sel.value;sst.value=sel.value;rst.value=sel.value;if(ROWS||!ROOMS_API)showRooms();
 $("go").style.display=$("see").style.display=e?"none":"";
 if(e){$("camploc").textContent="👆 Choose your state to see your camp, directions and group";$("mbox").style.display="none";$("hgo").textContent=$("rgo").textContent="📋 Copy & post in your state group"}
 else{try{localStorage.setItem("stt",sel.value)}catch(x){}}};
@@ -498,6 +571,33 @@ var f=new File([b],"corper-hub.png",{type:"image/png"});
 if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f],text:SHARE})}
 cp(SHARE);var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="corper-hub-status.png";document.body.appendChild(a);a.click();a.remove();
 alert("Image saved and caption copied. Open WhatsApp, tap Status, pick the image and paste the caption.")}).catch(function(){})};
+function go(t){
+var nt=t=="ride"?"dir":t;
+document.querySelectorAll("nav button").forEach(function(x){x.classList.toggle("on",x.dataset.t==nt)});
+document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on")});
+$("t-"+t).classList.add("on");
+$("fab").style.display=t=="sos"?"none":"flex";
+$("inst").style.display=(t=="home"&&!isS)?"block":"none";$("ins").style.display="none";
+if(t=="hs")loadRooms();
+window.scrollTo(0,0)}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){go(b.dataset.t)}});
+document.querySelectorAll("[data-to]").forEach(function(b){b.onclick=function(){go(b.dataset.to)}});
+var hmSel=$("h0s");
+S.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;hmSel.appendChild(o)});
+var o0=document.createElement("option");o0.value="";o0.textContent="Choose your state";hmSel.insertBefore(o0,hmSel.firstChild);
+var m4=maps;
+maps=function(){m4();hmSel.value=sel.value;
+var c=G[sel.value],a=$("grp0");a.href=c?"https://chat.whatsapp.com/"+c:"#";a.style.opacity=c?"1":".55";
+$("h0n").textContent=sel.value?(CAMP[sel.value]?"📍 Your camp: "+CAMP[sel.value]:"Confirm your camp on your call-up letter."):"Pick your state to unlock directions, your group and more."};
+$("grp0").onclick=function(){if(!sel.value){alert("Choose your state first.");return false}};
+sel.onchange=maps;hmSel.onchange=function(){sel.value=hmSel.value;maps()};
+maps();
+function setDates(){
+var d=$("dates"),t=new Date();
+if(t<new Date("2026-10-21T00:00:00+01:00"))d.innerHTML="<b>📅 Batch C Stream I camp:</b> 30 Sept to 20 Oct 2026. Registration closes at midnight on <b>Fri 2 Oct</b>, and swearing-in is the same day. NYSC advises <b>no night travel</b> and boarding only at designated motor parks.";
+else if(t<new Date("2026-11-25T00:00:00+01:00"))d.innerHTML="<b>📅 Batch C Stream II camp:</b> opens <b>Wed 4 Nov</b>. Registration closes at midnight on <b>Fri 6 Nov</b>, swearing-in is the same day, and camp closes <b>Tue 24 Nov</b>. NYSC advises <b>no night travel</b> and boarding only at designated motor parks.";
+else d.style.display="none"}
+setDates();
 gl();refresh();
 /* pwa */
 var dp=null,isS=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
