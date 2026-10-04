@@ -11,7 +11,7 @@
 :root[data-theme="dark"]{--bg:#0d1711;--card:#15231a;--tx:#e6f2ea;--mu:#93a99a;--g:#3ecf76;--g2:#173324;--bd:#25382b;--warn:#3a3210;--wt:#f0d77a}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:76px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:150px}
 header{background:var(--g);color:#fff;padding:22px 18px 20px}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) header{color:#06210f}}
 header h1{margin:0 0 4px;font-size:22px}
@@ -508,6 +508,8 @@ function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cl
 function g(r,k){return String(r[k]==null?"":r[k]).trim()}
 function tUrl(u,w){return u.replace("/upload/","/upload/w_"+w+",c_limit,q_auto,f_auto/")}
 function okImg(u){return CLOUD_NAME&&u.indexOf("https://res.cloudinary.com/"+CLOUD_NAME+"/")==0}
+function fmtDate(v){if(!v)return"";var d=new Date(v);if(isNaN(d))return v;return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"Africa/Lagos"})}
+function fmtRent(v){if(!v)return"";var s=String(v).trim();if(/^[0-9][0-9,\s]*$/.test(s))return"₦"+Number(s.replace(/[,\s]/g,"")).toLocaleString("en-NG");return/^[0-9]/.test(s)?"₦"+s:s}
 function showRooms(){
 var box=$("rooms");box.textContent="";
 if(!ROOMS_API){box.appendChild(el("p","m","Room listings will appear here soon. Be one of the first to list."));return}
@@ -516,7 +518,7 @@ var st=sel.value.toLowerCase(),q=($("rq").value||"").trim().toLowerCase(),n=0;
 ROWS.forEach(function(r){
 if(st&&g(r,"state").toLowerCase()!=st)return;
 if(q&&(g(r,"area")+" "+g(r,"about the room")).toLowerCase().indexOf(q)<0)return;
-if(n>=30)return;n++;
+var n10=g(r,"whatsapp").replace(/\D/g,"");if(n10.length<10)return;if(n>=30)return;n++;
 var d=el("div","room");
 var ph=g(r,"photos").split(/\s+/).filter(okImg).slice(0,3);
 if(ph.length){var sp=el("div","strip");ph.forEach(function(u){var im=document.createElement("img");im.loading="lazy";im.alt="Room photo";im.src=tUrl(u,600);im.onclick=function(){$("lbi").src=tUrl(u,1200);$("lb").style.display="flex"};sp.appendChild(im)});d.appendChild(sp)}
@@ -525,12 +527,11 @@ if(g(r,"verified").toLowerCase()=="yes")tp.appendChild(el("span","chip","✓ Ver
 if(g(r,"room type"))tp.appendChild(el("span","chip",g(r,"room type")));
 if(tp.childNodes.length)d.appendChild(tp);
 d.appendChild(el("div","t",(g(r,"area")||"Room")+" · "+g(r,"state")));
-var rent=g(r,"rent");if(/^[0-9]/.test(rent))rent="₦"+rent;
+var rent=fmtRent(g(r,"rent"));
 if(rent)d.appendChild(el("div","rent",rent));
-var bits=[g(r,"spaces")?g(r,"spaces")+" space(s) available":"",g(r,"available from")?"From "+g(r,"available from"):"",g(r,"preference")].filter(Boolean);
+var bits=[g(r,"spaces")?g(r,"spaces")+" space(s) available":"",fmtDate(g(r,"available from"))?"From "+fmtDate(g(r,"available from")):"",g(r,"preference")].filter(Boolean);
 if(bits.length)d.appendChild(el("div","m",bits.join(" · ")));
 if(g(r,"about the room"))d.appendChild(el("p","",g(r,"about the room")));
-var n10=g(r,"whatsapp").replace(/\D/g,"");
 if(n10.length>=10){var a=el("a","btn","💬 Message on WhatsApp");a.style.marginTop="8px";a.target="_blank";a.rel="noopener";a.href=wa("Hello, I saw your room listing ("+g(r,"area")+") on Corper Hub. Is it still available?",n10);d.appendChild(a)}
 d.appendChild(el("div","m","Always inspect in daylight. Never pay before you see the room."));
 var rp=el("a","m","Report this listing");rp.target="_blank";rp.rel="noopener";
