@@ -503,7 +503,7 @@ maps();
 function fb(){$("fb").href="https://wa.me/2349151423673?text="+encodeURIComponent("Hello Corper Hub 👋\nState: "+sel.value+"\n\nMy suggestion / problem:\n")}
 document.addEventListener("change",fb);fb();
 document.querySelectorAll("[data-go2]").forEach(function(b){b.onclick=function(){document.querySelector('nav button[data-t="'+b.dataset.go2+'"]').click()}});
-var ROOMS_API="",CLOUD_NAME="",CLOUD_PRESET="",ROWS=null,OWNER="2349151423673";
+var ROOMS_API="https://script.google.com/macros/s/AKfycbywbUyeI5puSLHnAUFIyx6DRAEjwt-hWxkZ5LQGARVDma4SmSYpuHCRzLdi9_FNBuJhDA/exec",CLOUD_NAME="",CLOUD_PRESET="",ROWS=null,OWNER="2349151423673";
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
 function g(r,k){return String(r[k]==null?"":r[k]).trim()}
 function tUrl(u,w){return u.replace("/upload/","/upload/w_"+w+",c_limit,q_auto,f_auto/")}
