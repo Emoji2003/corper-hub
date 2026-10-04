@@ -67,12 +67,15 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<meta name="description" content="Free guide for NYSC corpers: camp directions, travel buddies, rooms to share, scam alerts and an SOS button. Unofficial, not run by NYSC.">
+<meta property="og:type" content="website"><meta property="og:title" content="Corper Hub: get to NYSC camp safely"><meta property="og:description" content="Camp directions, travel buddies, rooms to share, scam alerts and an SOS button. Free. Unofficial, not run by NYSC."><meta property="og:url" content="https://corper-hub.vercel.app/"><meta property="og:image" content="https://corper-hub.vercel.app/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <header>
 <a id="hshare" class="hshare" target="_blank" rel="noopener">📤 Share</a>
 <h1>🇳🇬 Corper Hub</h1>
 <p>Camp, rides, rooms and safety in one place.</p>
+<p style="font-size:12px;opacity:.85;margin-top:2px">Unofficial. Not run by NYSC.</p>
 </header>
 <main>
 
@@ -91,6 +94,14 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <button class="tile" data-to="sos"><span>🛡️</span><b>Stay safe</b><small>SOS and scam alerts</small></button>
 <a class="tile" id="grp0" target="_blank" rel="noopener"><span>💬</span><b>State group</b><small>Join on WhatsApp</small></a>
 </div>
+<div class="card" style="text-align:center">
+<b>Get updates</b>
+<p style="font-size:13px;color:var(--mu);margin:6px 0 0">Save our WhatsApp TV number to see our updates on your Status.</p>
+<button class="btn" id="vc">📇 Save Corper Hub TV</button>
+<p style="font-size:12px;color:var(--mu);margin:8px 0 0">Or save 0915 142 3673 as "Corper Hub TV".</p>
+<a id="fbk" class="btn alt" target="_blank" rel="noopener" style="display:none">Follow on Facebook</a>
+<a id="xk" class="btn alt" target="_blank" rel="noopener" style="display:none">Follow on X</a>
+</div>
 <div class="card" style="text-align:center;margin-top:4px">
 <b>Know a corper who is travelling?</b>
 <button class="btn" id="shs">📲 Share status image</button>
@@ -102,6 +113,15 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <b>Got an idea or found a problem?</b>
 <a id="fb" class="btn alt" target="_blank" rel="noopener">💡 Suggest a feature / report a problem</a>
 <p style="font-size:12px;color:var(--mu);margin:8px 0 0">Opens WhatsApp to the Corper Hub team.</p>
+</div>
+<div class="card">
+<details><summary>Privacy and about this site</summary>
+<p>Corper Hub is an unofficial site. It is not run by or connected to NYSC.</p>
+<p>Your state, checklist ticks and SOS contacts are saved only on your phone. We don't collect them.</p>
+<p>Messages you create here are sent through WhatsApp, to the people or groups you choose.</p>
+<p>If you list a room, your details and WhatsApp number are shown publicly once approved.</p>
+<p>We count visits with Vercel Analytics, which shows totals such as how many people visited.</p>
+</details>
 </div>
 </section>
 
@@ -328,7 +348,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <div id="lm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;align-items:flex-start;justify-content:center;padding:12px;overflow:auto">
 <div class="card" style="max-width:460px;width:100%;margin:0">
 <h2>➕ List my room</h2>
-<p style="margin:0;font-size:14px;color:var(--mu)">Add 1 to 3 photos of the real room. Your photos and WhatsApp number show publicly once approved.</p>
+<p style="margin:0;font-size:14px;color:var(--mu)">Your room details and WhatsApp number show publicly once approved.</p>
 <label for="ls">State</label><select id="ls"></select>
 <label for="la">Area</label><input id="la" placeholder="e.g. Barnawa, near the junction">
 <label for="lt">Room type</label><select id="lt"><option>Self-contained</option><option>Room and parlour</option><option>Shared room</option><option>Other</option></select>
@@ -340,7 +360,7 @@ details p,details ul{margin:8px 0 0;font-size:14px}
 <label for="lw">Your WhatsApp number</label><input id="lw" type="tel" inputmode="tel" placeholder="e.g. 0803 000 0000">
 <label for="lph">Photos of the room (1 to 3)</label><input id="lph" type="file" accept="image/*" multiple>
 <input id="lh" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-<label style="display:flex;gap:10px;align-items:flex-start;color:inherit;font-size:14px;margin-top:12px"><input id="lc" type="checkbox" style="width:22px;height:22px;flex:none"><span>I agree my photos and WhatsApp number will show publicly, and the photos show the real room.</span></label>
+<label style="display:flex;gap:10px;align-items:flex-start;color:inherit;font-size:14px;margin-top:12px"><input id="lc" type="checkbox" style="width:22px;height:22px;flex:none"><span>I agree my room details and WhatsApp number will show publicly.</span></label>
 <p id="lst" style="font-size:14px;margin:10px 0 0"></p>
 <button class="btn" id="lsub">Submit my listing</button>
 <button class="btn alt" id="lx">Close</button>
@@ -512,7 +532,7 @@ if(bits.length)d.appendChild(el("div","m",bits.join(" · ")));
 if(g(r,"about the room"))d.appendChild(el("p","",g(r,"about the room")));
 var n10=g(r,"whatsapp").replace(/\D/g,"");
 if(n10.length>=10){var a=el("a","btn","💬 Message on WhatsApp");a.style.marginTop="8px";a.target="_blank";a.rel="noopener";a.href=wa("Hello, I saw your room listing ("+g(r,"area")+") on Corper Hub. Is it still available?",n10);d.appendChild(a)}
-d.appendChild(el("div","m","Photos help, but always inspect in daylight. Never pay before you see the room."));
+d.appendChild(el("div","m","Always inspect in daylight. Never pay before you see the room."));
 var rp=el("a","m","Report this listing");rp.target="_blank";rp.rel="noopener";
 rp.href=wa("🚨 Report a listing on Corper Hub\nArea: "+g(r,"area")+"\nState: "+g(r,"state")+"\nReason: ",OWNER);
 d.appendChild(rp);box.appendChild(d)});
@@ -523,11 +543,14 @@ $("rooms").textContent="Loading rooms...";
 fetch(ROOMS_API).then(function(r){return r.json()}).then(function(a){ROWS=Array.isArray(a)?a:[];showRooms()}).catch(function(){$("rooms").textContent="Could not load rooms. Check your connection and try again."})}
 function shrink(f){return new Promise(function(ok,no){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){var k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?ok(b):no()},"image/jpeg",0.72)};im.onerror=no;im.src=u})}
 function upl(b){var f=new FormData();f.append("file",b);f.append("upload_preset",CLOUD_PRESET);return fetch("https://api.cloudinary.com/v1_1/"+CLOUD_NAME+"/image/upload",{method:"POST",body:f}).then(function(r){return r.json()}).then(function(j){if(!j.secure_url)throw 0;return j.secure_url})}
+var PH=!!(CLOUD_NAME&&CLOUD_PRESET);
+if(!PH){$("lph").style.display="none";$("lph").previousElementSibling.style.display="none"}
+else{$("lm").querySelector("p").textContent="Add 1 to 3 photos of the real room. Your photos and WhatsApp number show publicly once approved.";$("lc").nextElementSibling.textContent="I agree my photos and WhatsApp number will show publicly, and the photos show the real room."}
 var ls=$("ls");
 [""].concat(S).forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s||"Choose state";ls.appendChild(o)});
 var RL=$("rl");
 RL.href=wa("🏠 I want to list a room on Corper Hub\nState: \nArea: \nRent: \nSpaces available: \nAvailable from: \nPreference (any / male / female): \nAbout the room: \nMy WhatsApp number: ",OWNER);
-RL.onclick=function(){if(!ROOMS_API||!CLOUD_NAME||!CLOUD_PRESET)return true;ls.value=sel.value||"";$("lm").style.display="flex";return false};
+RL.onclick=function(){if(!ROOMS_API)return true;ls.value=sel.value||"";$("lm").style.display="flex";return false};
 $("lx").onclick=function(){$("lm").style.display="none"};
 $("lb").onclick=function(){this.style.display="none"};
 $("lsub").onclick=function(){
@@ -535,8 +558,8 @@ var st=$("lst"),b=$("lsub");
 if($("lh").value)return;
 var last=0;try{last=+localStorage.getItem("lastlist")||0}catch(e){}
 if(Date.now()-last<60000){st.textContent="Please wait a minute before submitting again.";return}
-var w=num($("lw").value),fs=Array.prototype.slice.call($("lph").files).slice(0,3);
-if(!ls.value||!$("la").value.trim()||w.length<13||!fs.length||!$("lc").checked){st.textContent="Please fill in the state, area and WhatsApp number, add at least 1 photo, and tick the box.";return}
+var w=num($("lw").value),fs=PH?Array.prototype.slice.call($("lph").files).slice(0,3):[];
+if(!ls.value||!$("la").value.trim()||w.length<13||(PH&&!fs.length)||!$("lc").checked){st.textContent="Please fill in the state, area and WhatsApp number"+(PH?", add at least 1 photo":"")+", and tick the box.";return}
 b.disabled=true;var urls=[],p=Promise.resolve();
 fs.forEach(function(f,i){p=p.then(function(){st.textContent="Uploading photo "+(i+1)+" of "+fs.length+"...";return shrink(f)}).then(upl).then(function(u){urls.push(u)})});
 p.then(function(){
@@ -571,7 +594,9 @@ var f=new File([b],"corper-hub.png",{type:"image/png"});
 if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f],text:SHARE})}
 cp(SHARE);var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="corper-hub-status.png";document.body.appendChild(a);a.click();a.remove();
 alert("Image saved and caption copied. Open WhatsApp, tap Status, pick the image and paste the caption.")}).catch(function(){})};
-function go(t){
+var TN={home:"home",dir:"travel",ride:"buddies",hs:"rooms",gd:"camp",sos:"safety"};
+function fromHash(){var k=location.hash.slice(1);for(var t in TN)if(TN[t]==k)return t;return "home"}
+function go(t,pop){
 var nt=t=="ride"?"dir":t;
 document.querySelectorAll("nav button").forEach(function(x){x.classList.toggle("on",x.dataset.t==nt)});
 document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on")});
@@ -579,7 +604,9 @@ $("t-"+t).classList.add("on");
 $("fab").style.display=t=="sos"?"none":"flex";
 $("inst").style.display=(t=="home"&&!isS)?"block":"none";$("ins").style.display="none";
 if(t=="hs")loadRooms();
+if(!pop&&location.hash!="#"+TN[t]){try{history.pushState({t:t},"","#"+TN[t])}catch(e){}}
 window.scrollTo(0,0)}
+window.addEventListener("popstate",function(e){go((e.state&&e.state.t)||fromHash(),true)});
 document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){go(b.dataset.t)}});
 document.querySelectorAll("[data-to]").forEach(function(b){b.onclick=function(){go(b.dataset.to)}});
 var hmSel=$("h0s");
@@ -611,6 +638,13 @@ var ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
 ic.innerHTML=(ios?"<b>iPhone:</b> open this page in <b>Safari</b>, tap the <b>Share</b> button, then <b>Add to Home Screen</b>.":"<b>Android:</b> open this page in <b>Chrome</b>, tap the <b>&#8942; menu</b>, then <b>Install app</b> or <b>Add to Home screen</b>.")+' <button class="btn alt" id="xi">Got it</button>';
 ic.style.display="block";$("xi").onclick=function(){ic.style.display="none"}};
 if("serviceWorker" in navigator&&location.protocol.indexOf("http")==0)navigator.serviceWorker.register("sw.js").catch(function(){});
+if(location.hash&&fromHash()!="home")go(fromHash(),true);
+var SOC={fb:"",x:""};
+if(SOC.fb){$("fbk").href=SOC.fb;$("fbk").style.display="block"}
+if(SOC.x){$("xk").href=SOC.x;$("xk").style.display="block"}
+$("vc").onclick=function(){
+var t="BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Corper Hub TV\r\nORG:Corper Hub\r\nTEL;TYPE=CELL:+2349151423673\r\nEND:VCARD\r\n";
+var b=new Blob([t],{type:"text/vcard"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="corper-hub-tv.vcf";document.body.appendChild(a);a.click();a.remove()};
 </script>
 </body>
 </html>
